@@ -118,8 +118,14 @@ final class AppSettings: ObservableObject {
         warningThreshold = warning
         criticalThreshold = critical
 
-        enabledProviderIDs = (defaults.array(forKey: Keys.enabledProviders) as? [String])
-            ?? ["codex", "gpt", "cursor", "claude"]
+        let stored = (defaults.array(forKey: Keys.enabledProviders) as? [String])
+            ?? ["codex", "cursor", "claude"]
+        // Drop removed ChatGPT provider id from older installs.
+        var cleaned = stored.filter { $0 != "gpt" }
+        if cleaned.isEmpty {
+            cleaned = ["codex", "cursor", "claude"]
+        }
+        enabledProviderIDs = cleaned
 
         if defaults.object(forKey: Keys.showPercentInTray) == nil {
             showPercentInTray = true

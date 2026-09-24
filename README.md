@@ -1,22 +1,21 @@
 # Stack Meter AI
 
-Menu-bar utility for macOS that shows how much of your AI plan you have left — for **Codex**, **ChatGPT**, **Cursor**, and **Claude** — without opening each product’s dashboard.
+Menu-bar utility for macOS that shows how much of your AI plan you have left — for **Codex**, **Cursor**, and **Claude** — without opening each product’s dashboard.
 
 ## How it works
 
 1. **Lives in the menu bar**  
-   No Dock icon (`LSUIElement`). A sparkle icon shows a status dot (green / orange / red) and optionally the used % for the selected provider.
+   No Dock icon. A sparkle icon shows a status dot (green / orange / red) and optionally the used % for the selected provider.
 
 2. **You authorize each account once**  
    Credentials are stored in the macOS Keychain (not in the app folder).  
-   - **Codex + ChatGPT** — one shared ChatGPT login (in-app browser) or import from Codex CLI `~/.codex/auth.json`  
+   - **Codex** — ChatGPT account login (in-app browser) or import from Codex CLI `~/.codex/auth.json`  
    - **Cursor** — reads the local Cursor IDE session (`state.vscdb`) and copies the token into Keychain  
    - **Claude** — sign in via Claude.ai in an in-app browser; the `sessionKey` cookie is saved  
 
 3. **It polls usage APIs on a timer** (default every 60s, adjustable in Settings)  
    Each enabled provider is fetched in the background so the menu bar stays responsive.  
    - Codex → ChatGPT backend usage (`/wham/usage`)  
-   - ChatGPT → conversation / plan limits (`/conversation/limits`)  
    - Cursor → `cursor.com` usage summary  
    - Claude → organization usage windows (5h / weekly / model caps)  
 
@@ -24,10 +23,10 @@ Menu-bar utility for macOS that shows how much of your AI plan you have left —
    Click the menu-bar icon to see rate-limit windows, remaining %, reset times, credits/spend, and tokens when available. Switch providers with the tabs.
 
 5. **Optional notifications**  
-   On first launch the app asks permission (no silent registration). If you choose “Not Now”, you can enable later in **Settings → Notifications**. Alerts for thresholds, rate limits, resets, usage jumps, session expiry, and low credits are toggled individually.
+   On first launch the app asks permission (no silent registration). If you choose “Not Now”, you can enable later in **Settings → Notifications**.
 
 6. **Settings**  
-   Poll interval, tray %, language (System / English / Українська), providers on/off, account sign-out, and full uninstall (Keychain + prefs + app from `/Applications`).
+   Poll interval, tray %, language (System / English / Українська), providers on/off, account sign-out, and full uninstall.
 
 ```
 ┌─────────────┐     authorize      ┌──────────┐
@@ -37,8 +36,8 @@ Menu-bar utility for macOS that shows how much of your AI plan you have left —
        │ poll (background)               │ tokens
        ▼                                 ▼
 ┌─────────────┐   HTTPS / local DB   ┌──────────────┐
-│  Providers  │ ◄──────────────────► │ Codex/GPT/   │
-│  registry   │                      │ Cursor/Claude│
+│  Providers  │ ◄──────────────────► │ Codex/Cursor │
+│  registry   │                      │ /Claude      │
 └──────┬──────┘                      └──────────────┘
        │ snapshots
        ▼
@@ -52,7 +51,7 @@ Menu-bar utility for macOS that shows how much of your AI plan you have left —
 
 - Menu bar only — lightweight, always visible  
 - Per-provider usage % with color thresholds  
-- Shared ChatGPT session for Codex + ChatGPT (different limit endpoints)  
+- Codex via ChatGPT account session  
 - Auto-refresh, UK/EN localization  
 - Explicit first-launch notification consent  
 - Clean uninstall from Settings  
@@ -66,7 +65,7 @@ Menu-bar utility for macOS that shows how much of your AI plan you have left —
 
 ### From DMG (recommended)
 
-1. Open `dist/Stack-Meter-AI-<version>.dmg` (or build one — see below)  
+1. Open `dist/Stack-Meter-AI-<version>.dmg` (or build one — see [`BUILD.md`](BUILD.md))  
 2. Drag **Stack Meter AI** into **Applications**  
 3. Launch from Applications  
 
@@ -74,13 +73,11 @@ To update later: drag the new app over the old one and replace. Settings and Key
 
 ### Build a DMG
 
-Full step-by-step guide (prerequisites, versioning, signing, troubleshooting): **[`BUILD.md`](BUILD.md)**.
+Full guide: **[`BUILD.md`](BUILD.md)**.
 
 ```bash
 ./scripts/package.sh
 ```
-
-Output: `dist/Stack-Meter-AI-<version>.dmg`
 
 ### Dev run
 
@@ -95,35 +92,21 @@ Scheme **AIBar** → Run.
 
 | Provider | How |
 |----------|-----|
-| **Codex** + **ChatGPT** | Shared ChatGPT login (browser), or import Codex CLI `~/.codex/auth.json` |
+| **Codex** | ChatGPT login (browser), or import Codex CLI `~/.codex/auth.json` |
 | **Cursor** | Local Cursor IDE login → Keychain |
 | **Claude** | Sign in at Claude.ai in the app browser |
 
-**Sign out** is in Settings per account. Signing out of ChatGPT clears both Codex and ChatGPT.
-
-### GPT vs Codex
-
-Same ChatGPT account, different quotas:
-
-| Tab | What it measures |
-|-----|------------------|
-| **Codex** | Coding-agent limits |
-| **ChatGPT** | Chat / conversation limits |
-
-OpenAI Platform API billing (`api.openai.com`) is not included yet.
+**Sign out** is in Settings per account.
 
 ## Uninstall
 
-**Settings → Danger zone → Uninstall** clears Keychain + preferences and removes the app from `/Applications` if present.  
-Or drag the app to Trash (credentials/settings remain until cleared in Settings).
+**Settings → Danger zone → Uninstall** clears Keychain + preferences and removes the app from `/Applications` if present.
 
 ## Version & changelog
 
-- Version numbers live in [`project.yml`](project.yml): `MARKETING_VERSION` and `CURRENT_PROJECT_VERSION`  
-- Release notes: **[`CHANGELOG.md`](CHANGELOG.md)** — append an entry for every new version  
+- Version numbers live in [`project.yml`](project.yml)  
+- Release notes: **[`CHANGELOG.md`](CHANGELOG.md)**  
 - How to build the DMG: **[`BUILD.md`](BUILD.md)**  
-
-After bumping the version, run `./scripts/package.sh` again.
 
 ## Icons
 
@@ -133,8 +116,6 @@ python3 scripts/generate_icons.py
 
 - App: `Branding/AppIcon.icns`  
 - DMG volume: `Design/icons/VolumeIcon.icns`  
-
-`scripts/package.sh` regenerates icons and applies them automatically.
 
 ## License
 

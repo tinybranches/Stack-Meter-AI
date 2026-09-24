@@ -7,6 +7,19 @@ Format: version, date, then **Added** / **Changed** / **Fixed** / **Removed**.
 
 ---
 
+## 1.8.0 — 2026-09-24
+
+### Removed
+
+- **ChatGPT** provider tab and all GPT-specific usage code (`GPTProvider` / `GPTAPIClient`). Chat and Codex quotas are no longer separate in the API we can call; Codex remains (authorized via ChatGPT login or Codex CLI).
+
+### Changed
+
+- Default providers: Codex, Cursor, Claude. Existing installs drop `gpt` from the enabled list automatically.
+- Settings / copy updated: ChatGPT login is only for Codex authorization.
+
+---
+
 ## 1.7.1 — 2026-09-24
 
 ### Fixed

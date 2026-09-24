@@ -148,7 +148,6 @@ final class UsageViewModel: ObservableObject {
         authWaitTask = nil
         codexAuth.signOut()
         snapshots["codex"] = .authNeeded(providerID: "codex", providerName: "Codex", message: "auth.chatgpt.needed")
-        snapshots["gpt"] = .authNeeded(providerID: "gpt", providerName: "ChatGPT", message: "auth.chatgpt.needed")
     }
 
     func signOutCursor() {

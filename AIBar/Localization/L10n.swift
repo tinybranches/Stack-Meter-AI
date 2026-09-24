@@ -175,10 +175,6 @@ enum L10n {
             .english: "No rate-limit windows reported.",
             .ukrainian: "Вікна лімітів не повідомлені.",
         ],
-        "gpt.sharedUsageHint": [
-            .english: "Plan usage windows (often shared with Codex on Plus/Pro). Separate chat-only meters are no longer exposed by ChatGPT’s API.",
-            .ukrainian: "Вікна використання плану (на Plus/Pro часто спільні з Codex). Окремі ліміти лише для чату ChatGPT API більше не віддає.",
-        ],
         "popover.spend": [.english: "Spend", .ukrainian: "Витрати"],
         "popover.credits": [.english: "Credits $%.2f", .ukrainian: "Кредити $%.2f"],
         "popover.usedUSD": [.english: "Used $%.2f", .ukrainian: "Використано $%.2f"],
@@ -190,23 +186,23 @@ enum L10n {
         "popover.leftPercent": [.english: "%d%% left", .ukrainian: "%d%% залишилось"],
         "popover.resets": [.english: "Resets %@", .ukrainian: "Скидання %@"],
 
-        "auth.title": [.english: "Authorize ChatGPT", .ukrainian: "Авторизувати ChatGPT"],
+        "auth.title": [.english: "Authorize Codex", .ukrainian: "Авторизувати Codex"],
         "auth.needed": [
-            .english: "ChatGPT is not authorized in Stack Meter AI yet.",
-            .ukrainian: "ChatGPT ще не авторизований у Stack Meter AI.",
+            .english: "Codex is not authorized in Stack Meter AI yet.",
+            .ukrainian: "Codex ще не авторизований у Stack Meter AI.",
         ],
         "auth.expired": [
-            .english: "ChatGPT session expired. Sign in again to continue.",
-            .ukrainian: "Сесію ChatGPT завершено. Увійдіть знову, щоб продовжити.",
+            .english: "Session expired. Sign in again to continue.",
+            .ukrainian: "Сесію завершено. Увійдіть знову, щоб продовжити.",
         ],
         "auth.rateLimitedTemp": [
             .english: "Temporarily rate limited while fetching usage.",
             .ukrainian: "Тимчасово обмежено під час отримання використання.",
         ],
-        "auth.chatgpt.title": [.english: "Authorize ChatGPT", .ukrainian: "Авторизувати ChatGPT"],
+        "auth.chatgpt.title": [.english: "Authorize Codex", .ukrainian: "Авторизувати Codex"],
         "auth.chatgpt.needed": [
-            .english: "Sign in with ChatGPT to track Codex and ChatGPT usage.",
-            .ukrainian: "Увійдіть через ChatGPT, щоб бачити ліміти Codex і ChatGPT.",
+            .english: "Sign in with your ChatGPT account to track Codex usage.",
+            .ukrainian: "Увійдіть через обліковий запис ChatGPT, щоб бачити ліміти Codex.",
         ],
         "auth.chatgpt.expired": [
             .english: "ChatGPT session expired. Sign in again.",
@@ -221,8 +217,8 @@ enum L10n {
             .ukrainian: "Авторизувати з входу Codex CLI",
         ],
         "auth.chatgpt.hint": [
-            .english: "One ChatGPT login unlocks both Codex and ChatGPT. If in-app Google login fails, run `codex login` then use “Authorize with Codex CLI login”.",
-            .ukrainian: "Один вхід ChatGPT відкриває і Codex, і ChatGPT. Якщо Google у вікні не входить — виконайте `codex login`, потім «Авторизувати з входу Codex CLI».",
+            .english: "Codex uses your ChatGPT account. If in-app Google login fails, run `codex login` then use “Authorize with Codex CLI login”.",
+            .ukrainian: "Codex використовує обліковий запис ChatGPT. Якщо Google у вікні не входить — виконайте `codex login`, потім «Авторизувати з входу Codex CLI».",
         ],
         "auth.chatgpt.loginTitle": [
             .english: "ChatGPT login",
@@ -425,8 +421,8 @@ enum L10n {
             .ukrainian: "Увімкніть провайдерів для перемикача в menu bar.",
         ],
         "settings.chatgptAccount": [
-            .english: "ChatGPT account (Codex + GPT)",
-            .ukrainian: "Обліковий запис ChatGPT (Codex + GPT)",
+            .english: "Codex account (ChatGPT login)",
+            .ukrainian: "Обліковий запис Codex (вхід ChatGPT)",
         ],
         "settings.codexAccount": [.english: "Codex account", .ukrainian: "Обліковий запис Codex"],
         "settings.cursorAccount": [.english: "Cursor account", .ukrainian: "Обліковий запис Cursor"],

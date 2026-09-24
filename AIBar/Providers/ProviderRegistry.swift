@@ -7,7 +7,6 @@ final class ProviderRegistry: ObservableObject {
     init(
         providers: [any UsageProvider] = [
             CodexProvider(),
-            GPTProvider(),
             CursorProvider(),
             ClaudeProvider(),
         ]

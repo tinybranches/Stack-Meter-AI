@@ -216,7 +216,7 @@ private struct AuthNeededView: View {
                 .fixedSize(horizontal: false, vertical: true)
 
             switch viewModel.selectedProviderID {
-            case "codex", "gpt":
+            case "codex":
                 Button {
                     viewModel.authorizeChatGPTBrowser()
                 } label: {
@@ -284,7 +284,6 @@ private struct AuthNeededView: View {
 
     private var title: String {
         switch viewModel.selectedProviderID {
-        case "gpt": return L10n.tr("auth.chatgpt.title")
         case "cursor": return L10n.tr("auth.cursor.title")
         case "claude": return L10n.tr("auth.claude.title")
         default: return L10n.tr("auth.title")
@@ -293,7 +292,7 @@ private struct AuthNeededView: View {
 
     private var defaultMessage: String {
         switch viewModel.selectedProviderID {
-        case "gpt", "codex": return L10n.tr("auth.chatgpt.needed")
+        case "codex": return L10n.tr("auth.chatgpt.needed")
         case "cursor": return L10n.tr("auth.cursor.needed")
         case "claude": return L10n.tr("auth.claude.needed")
         default: return L10n.tr("auth.needed")
