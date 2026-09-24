@@ -74,6 +74,8 @@ To update later: drag the new app over the old one and replace. Settings and Key
 
 ### Build a DMG
 
+Full step-by-step guide (prerequisites, versioning, signing, troubleshooting): **[`BUILD.md`](BUILD.md)**.
+
 ```bash
 ./scripts/package.sh
 ```
@@ -119,6 +121,7 @@ Or drag the app to Trash (credentials/settings remain until cleared in Settings)
 
 - Version numbers live in [`project.yml`](project.yml): `MARKETING_VERSION` and `CURRENT_PROJECT_VERSION`  
 - Release notes: **[`CHANGELOG.md`](CHANGELOG.md)** — append an entry for every new version  
+- How to build the DMG: **[`BUILD.md`](BUILD.md)**  
 
 After bumping the version, run `./scripts/package.sh` again.
 
