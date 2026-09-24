@@ -126,7 +126,7 @@ Writes:
 | `xcodegen: command not found` | `brew install xcodegen` |
 | `pillow` / PIL import error | `pip3 install pillow` |
 | `xcodebuild` fails on license / SDK | Install Xcode from the App Store; run `sudo xcodebuild -license` |
-| App has no icon in Notifications | Confirm `AIBar/Assets.xcassets` exists and the built app contains `Contents/Resources/Assets.car`. Re-run `./scripts/package.sh`. Quit the app, replace `/Applications/Stack Meter AI.app`, then relaunch. If the placeholder remains, reset icon cache: `sudo rm -rf /Library/Caches/com.apple.iconservices.store` and `killall Dock`. |
+| App has no icon in Notifications | Confirm the app has `Contents/Resources/Assets.car` + `AppIcon.icns`, and Info.plist does **not** set `LSUIElement` (Dock is hidden at runtime). Reinstall from a fresh DMG, then reset the stale Notifications row: `tccutil reset Notifications com.stackmeter.ai`, quit System Settings, relaunch the app and allow notifications again. |
 | DMG mounts but Applications link is wrong | Staging must contain only the `.app` and an `Applications` **symlink** — re-run the script from a clean tree (`rm -rf build/dmg-staging`) |
 | Gatekeeper blocks the app | Expected for ad-hoc signed builds; use Right-click → Open, or notarize |
 

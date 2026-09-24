@@ -58,6 +58,25 @@ if [[ ! -f "$APP/Contents/Resources/AppIcon.icns" ]]; then
   cp "$APP_ICON_ICNS" "$APP/Contents/Resources/AppIcon.icns"
 fi
 
+if [[ ! -f "$APP/Contents/Resources/Assets.car" ]]; then
+  echo "ERROR: Assets.car missing from app bundle (Notifications needs it)"
+  exit 1
+fi
+
+echo "==> Applying Finder/LaunchServices icon on .app"
+APP="$APP" ICON="$APP_ICON_ICNS" swift -e '
+import AppKit
+let app = ProcessInfo.processInfo.environment["APP"]!
+let icon = ProcessInfo.processInfo.environment["ICON"]!
+guard let image = NSImage(contentsOfFile: icon) else {
+    fputs("Could not load AppIcon.icns\n", stderr)
+    exit(1)
+}
+let ok = NSWorkspace.shared.setIcon(image, forFile: app, options: [])
+print("App bundle Finder icon set:", ok)
+'
+/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f -R -trusted "$APP" >/dev/null || true
+
 echo "==> Staging DMG contents"
 rm -rf "$STAGING"
 mkdir -p "$STAGING"

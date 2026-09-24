@@ -7,6 +7,14 @@ Format: version, date, then **Added** / **Changed** / **Fixed** / **Removed**.
 
 ---
 
+## 1.6.9 — 2026-09-24
+
+### Fixed
+
+- Blank placeholder icon in **System Settings → Notifications**: removed `LSUIElement` from Info.plist (Dock still hidden via `setActivationPolicy(.accessory)`), apply `AppIcon.icns` to `NSApp.applicationIconImage` before notification auth, register with Launch Services, and stamp the Finder icon onto the `.app` during packaging.
+
+---
+
 ## 1.6.8 — 2026-09-24
 
 ### Fixed

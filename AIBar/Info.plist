@@ -28,8 +28,12 @@
 	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
-	<key>LSUIElement</key>
-	<true/>
+	<!--
+	  Do NOT set LSUIElement in Info.plist.
+	  Agent apps with LSUIElement=true often show a blank placeholder in
+	  System Settings → Notifications. We hide the Dock icon at runtime via
+	  NSApp.setActivationPolicy(.accessory) instead.
+	-->
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2026 Stack Meter AI. All rights reserved.</string>
 </dict>

@@ -127,6 +127,7 @@ final class NotificationService: ObservableObject {
     }
 
     private func requestSystemAuthorization() async -> Bool {
+        AppIcon.applyToRunningApplication()
         NSApp.activate(ignoringOtherApps: true)
         do {
             let granted = try await UNUserNotificationCenter.current()
