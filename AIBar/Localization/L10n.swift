@@ -130,6 +130,39 @@ enum L10n {
         "common.quit": [.english: "Quit", .ukrainian: "Вийти"],
         "common.status": [.english: "Status", .ukrainian: "Статус"],
 
+        "instance.alreadyTitle": [
+            .english: "Already running",
+            .ukrainian: "Уже запущено",
+        ],
+        "instance.alreadyBody": [
+            .english: "Stack Meter AI %@ is already running in the menu bar. This second copy will quit.",
+            .ukrainian: "Stack Meter AI %@ уже працює в меню-барі. Ця друга копія зараз закриється.",
+        ],
+        "instance.olderTitle": [
+            .english: "Older version is running",
+            .ukrainian: "Запущена старіша версія",
+        ],
+        "instance.olderBody": [
+            .english: "An older Stack Meter AI (%@) is still running in the menu bar. Quit it before opening this update — or quit it now from this dialog.",
+            .ukrainian: "У меню-барі досі працює старіша Stack Meter AI (%@). Закрийте її перед відкриттям цього оновлення — або завершіть її зараз із цього вікна.",
+        ],
+        "instance.newerTitle": [
+            .english: "Newer version is running",
+            .ukrainian: "Запущена новіша версія",
+        ],
+        "instance.newerBody": [
+            .english: "A newer Stack Meter AI (%@) is already running. This older copy will quit.",
+            .ukrainian: "Уже працює новіша Stack Meter AI (%@). Ця старіша копія зараз закриється.",
+        ],
+        "instance.quitOlder": [
+            .english: "Quit older version",
+            .ukrainian: "Закрити старішу версію",
+        ],
+        "instance.ok": [
+            .english: "OK",
+            .ukrainian: "Гаразд",
+        ],
+
         "status.active": [.english: "Active", .ukrainian: "Активний"],
         "status.rateLimited": [.english: "Rate limited", .ukrainian: "Ліміт вичерпано"],
         "status.authNeeded": [.english: "Auth needed", .ukrainian: "Потрібна авторизація"],

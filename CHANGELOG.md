@@ -7,6 +7,14 @@ Format: version, date, then **Added** / **Changed** / **Fixed** / **Removed**.
 
 ---
 
+## 1.7.0 — 2026-09-24
+
+### Added
+
+- Single-instance guard: launching a second copy shows an alert instead of a duplicate menu-bar icon. Same version → “already running”; older version still open → prompt to quit it (or quit from the dialog) before the update continues; newer already running → this older copy exits.
+
+---
+
 ## 1.6.9 — 2026-09-24
 
 ### Fixed

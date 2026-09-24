@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00271D85CDEBFF9C485062C3 /* ProviderAuthControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1B024C1BAB6D6E9E9CA577 /* ProviderAuthControllers.swift */; };
+		122361C8B7545A0933BE7ECA /* SingleInstanceGuard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB84BA511643E2EB0423FD82 /* SingleInstanceGuard.swift */; };
 		12493D3F038F10ABEFB5B5A0 /* UsageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303423F4DA65D5F92D4403E8 /* UsageViewModel.swift */; };
 		1B006655B62F1F193BD1FC3E /* GPTAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7A78024350DFE7B90FED20 /* GPTAPIClient.swift */; };
 		1F7B2A03A4F0C039A694EE41 /* MenuBarLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72498A931B8EDF7CD07F5186 /* MenuBarLabelView.swift */; };
@@ -69,6 +70,7 @@
 		C5CAD81F33736C2CFE9D191A /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
 		C82F6D48678DE5F014D889C4 /* ClaudeAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeAPIClient.swift; sourceTree = "<group>"; };
 		CBC1734EABD470B414ACF318 /* UsageSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageSnapshot.swift; sourceTree = "<group>"; };
+		DB84BA511643E2EB0423FD82 /* SingleInstanceGuard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleInstanceGuard.swift; sourceTree = "<group>"; };
 		DC33F4D2AC173B0ADD660EA4 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		E3D6BD080B282117701D639D /* CursorAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorAPIClient.swift; sourceTree = "<group>"; };
 		EF5F1D76C17C36AE4B70DD2A /* AIBarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIBarApp.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				91077666E6A1A418D2BA22E3 /* CodexAuthStore.swift */,
 				DC33F4D2AC173B0ADD660EA4 /* NotificationService.swift */,
 				5D1B024C1BAB6D6E9E9CA577 /* ProviderAuthControllers.swift */,
+				DB84BA511643E2EB0423FD82 /* SingleInstanceGuard.swift */,
 				20E834991B040F5D3EA67BD5 /* UninstallService.swift */,
 				303423F4DA65D5F92D4403E8 /* UsageViewModel.swift */,
 			);
@@ -340,6 +343,7 @@
 				00271D85CDEBFF9C485062C3 /* ProviderAuthControllers.swift in Sources */,
 				A31C2A2ABB83120B387FE850 /* ProviderRegistry.swift in Sources */,
 				9894EB6EC7DE9FBD781B9A02 /* SettingsView.swift in Sources */,
+				122361C8B7545A0933BE7ECA /* SingleInstanceGuard.swift in Sources */,
 				71DE7E7ED7AC166793858067 /* StatusDot.swift in Sources */,
 				5F846CEAF2FA312D94864C8A /* UninstallService.swift in Sources */,
 				2D928C0AFEB6ED83436A1A41 /* UsageProvider.swift in Sources */,
@@ -406,7 +410,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -425,7 +429,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.6.9;
+				MARKETING_VERSION = 1.7.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -492,7 +496,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -505,7 +509,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.6.9;
+				MARKETING_VERSION = 1.7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";

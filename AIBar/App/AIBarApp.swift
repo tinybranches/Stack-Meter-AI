@@ -28,6 +28,12 @@ struct AIBarApp: App {
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillFinishLaunching(_ notification: Notification) {
+        // Single instance before any menu-bar / notification UI comes up.
+        if !SingleInstanceGuard.enforceOrAlert() {
+            NSApp.terminate(nil)
+            return
+        }
+
         // Icon first, then hide Dock — required so Notifications/System Settings
         // pick up AppIcon (LSUIElement in Info.plist leaves a blank placeholder).
         AppIcon.applyToRunningApplication()
@@ -43,6 +49,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         false
+    }
+
+    /// If user re-opens the app while it is already running as an agent, just activate.
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        true
     }
 }
 

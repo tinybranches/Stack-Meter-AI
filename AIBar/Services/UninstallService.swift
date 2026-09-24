@@ -67,6 +67,7 @@ enum UninstallService {
             library.appendingPathComponent("HTTPStorages/\(bundleID)"),
             library.appendingPathComponent("HTTPStorages/\(bundleID).binarycookies"),
             library.appendingPathComponent("Application Support/\(bundleID)"),
+            library.appendingPathComponent("Application Support/\(bundleID)/instance.lock"),
             library.appendingPathComponent("Saved Application State/\(bundleID).savedState"),
             library.appendingPathComponent("WebKit/\(bundleID)"),
             library.appendingPathComponent("Logs/\(bundleID)"),
