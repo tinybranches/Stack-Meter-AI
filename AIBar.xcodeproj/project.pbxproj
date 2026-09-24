@@ -1,0 +1,528 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00271D85CDEBFF9C485062C3 /* ProviderAuthControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D1B024C1BAB6D6E9E9CA577 /* ProviderAuthControllers.swift */; };
+		12493D3F038F10ABEFB5B5A0 /* UsageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303423F4DA65D5F92D4403E8 /* UsageViewModel.swift */; };
+		1B006655B62F1F193BD1FC3E /* GPTAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7A78024350DFE7B90FED20 /* GPTAPIClient.swift */; };
+		1F7B2A03A4F0C039A694EE41 /* MenuBarLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72498A931B8EDF7CD07F5186 /* MenuBarLabelView.swift */; };
+		268E29ECDE9F27C817AEDE51 /* CodexUsageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B1A38E34DD629D049625B5 /* CodexUsageDTO.swift */; };
+		28B661BC918E4DE41307F0F2 /* ClaudeAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82F6D48678DE5F014D889C4 /* ClaudeAPIClient.swift */; };
+		2B6B81B0170B012A064C5C57 /* ClaudeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A92A905CE959C49BDFD2E0 /* ClaudeProvider.swift */; };
+		2D928C0AFEB6ED83436A1A41 /* UsageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F201F9D259074016205639C /* UsageProvider.swift */; };
+		41D4BA478C243E26055C305E /* AIBarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5F1D76C17C36AE4B70DD2A /* AIBarApp.swift */; };
+		502CE9A8EB3EDC69395DEE28 /* ClaudeLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CC995FD19A0AAE5390C85F /* ClaudeLoginView.swift */; };
+		54CFB95950CA35053BF2B223 /* CodexAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4425488906869C079EEB8068 /* CodexAPIClient.swift */; };
+		5600197D69A1FE65D4CF0944 /* UsageSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC1734EABD470B414ACF318 /* UsageSnapshot.swift */; };
+		5BF72EACC77CDAD825F9367D /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5CAD81F33736C2CFE9D191A /* L10n.swift */; };
+		5D9C181CE8D091EBD00AFA61 /* CodexProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D340C50DEAF0D99E496DBD2 /* CodexProvider.swift */; };
+		5F2B69EA1E203A60B8508EA1 /* ChatGPTLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DE6518E9D7AD68AFC501C5 /* ChatGPTLoginView.swift */; };
+		5F846CEAF2FA312D94864C8A /* UninstallService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E834991B040F5D3EA67BD5 /* UninstallService.swift */; };
+		61E91B619FC21816A39CC628 /* CodexAuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91077666E6A1A418D2BA22E3 /* CodexAuthStore.swift */; };
+		71DE7E7ED7AC166793858067 /* StatusDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A585B90AEDDB3025F4295209 /* StatusDot.swift */; };
+		83EEA1C6C8FC59021DFF771E /* GPTProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD2379988A9C1A902020D61 /* GPTProvider.swift */; };
+		88265A476E7C7572025D9A90 /* PopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABEDA5730B9D95F8881C993 /* PopoverView.swift */; };
+		8B7B4EA8547AB7CEBB117995 /* CursorAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D6BD080B282117701D639D /* CursorAPIClient.swift */; };
+		9894EB6EC7DE9FBD781B9A02 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE7F996D7DD4334B9CF07E8 /* SettingsView.swift */; };
+		A31C2A2ABB83120B387FE850 /* ProviderRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC61BB5FDCF04DEAAC9155E /* ProviderRegistry.swift */; };
+		A74EF9E827484B8BB044D458 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C27CCA9BCECB23CA9BC4946 /* AppSettings.swift */; };
+		C67E433CAFCCA792617C9F3D /* CursorAuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C4E033E51AFE6DA6A9B570 /* CursorAuthStore.swift */; };
+		C956391840E50BB2DC8DB588 /* CodexAuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8A95F7FB522BEA9E144A7B /* CodexAuthController.swift */; };
+		EE0490C76B29D36576029AB3 /* CursorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84496AFEAD85C9776DC753D2 /* CursorProvider.swift */; };
+		F489EC2821F5BFBED1F02425 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33F4D2AC173B0ADD660EA4 /* NotificationService.swift */; };
+		FA1D6F5988DF3EA7440E426C /* ClaudeAuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9342C796B5EE30DF326E36 /* ClaudeAuthStore.swift */; };
+		FF807405DFD9790A6B4BB0AC /* CodexRolloutReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2AFA6D7B2B6E553FA047E7 /* CodexRolloutReader.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		065027B224F60D94C486DE58 /* AIBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AIBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C2AFA6D7B2B6E553FA047E7 /* CodexRolloutReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodexRolloutReader.swift; sourceTree = "<group>"; };
+		1A0D43A3EE1B777A6689FAAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		20E834991B040F5D3EA67BD5 /* UninstallService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UninstallService.swift; sourceTree = "<group>"; };
+		25A92A905CE959C49BDFD2E0 /* ClaudeProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeProvider.swift; sourceTree = "<group>"; };
+		2F7A78024350DFE7B90FED20 /* GPTAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTAPIClient.swift; sourceTree = "<group>"; };
+		303423F4DA65D5F92D4403E8 /* UsageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageViewModel.swift; sourceTree = "<group>"; };
+		4425488906869C079EEB8068 /* CodexAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodexAPIClient.swift; sourceTree = "<group>"; };
+		48B1A38E34DD629D049625B5 /* CodexUsageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodexUsageDTO.swift; sourceTree = "<group>"; };
+		5D1B024C1BAB6D6E9E9CA577 /* ProviderAuthControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderAuthControllers.swift; sourceTree = "<group>"; };
+		6C27CCA9BCECB23CA9BC4946 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		6E9342C796B5EE30DF326E36 /* ClaudeAuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeAuthStore.swift; sourceTree = "<group>"; };
+		72498A931B8EDF7CD07F5186 /* MenuBarLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarLabelView.swift; sourceTree = "<group>"; };
+		72CC995FD19A0AAE5390C85F /* ClaudeLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeLoginView.swift; sourceTree = "<group>"; };
+		75DE6518E9D7AD68AFC501C5 /* ChatGPTLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTLoginView.swift; sourceTree = "<group>"; };
+		7D340C50DEAF0D99E496DBD2 /* CodexProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodexProvider.swift; sourceTree = "<group>"; };
+		7E8A95F7FB522BEA9E144A7B /* CodexAuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodexAuthController.swift; sourceTree = "<group>"; };
+		80C4E033E51AFE6DA6A9B570 /* CursorAuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorAuthStore.swift; sourceTree = "<group>"; };
+		84496AFEAD85C9776DC753D2 /* CursorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorProvider.swift; sourceTree = "<group>"; };
+		8FC61BB5FDCF04DEAAC9155E /* ProviderRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderRegistry.swift; sourceTree = "<group>"; };
+		91077666E6A1A418D2BA22E3 /* CodexAuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodexAuthStore.swift; sourceTree = "<group>"; };
+		9F201F9D259074016205639C /* UsageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageProvider.swift; sourceTree = "<group>"; };
+		A585B90AEDDB3025F4295209 /* StatusDot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusDot.swift; sourceTree = "<group>"; };
+		AABEDA5730B9D95F8881C993 /* PopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverView.swift; sourceTree = "<group>"; };
+		C5CAD81F33736C2CFE9D191A /* L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L10n.swift; sourceTree = "<group>"; };
+		C82F6D48678DE5F014D889C4 /* ClaudeAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeAPIClient.swift; sourceTree = "<group>"; };
+		CBC1734EABD470B414ACF318 /* UsageSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageSnapshot.swift; sourceTree = "<group>"; };
+		DC33F4D2AC173B0ADD660EA4 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		E3D6BD080B282117701D639D /* CursorAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorAPIClient.swift; sourceTree = "<group>"; };
+		EF5F1D76C17C36AE4B70DD2A /* AIBarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIBarApp.swift; sourceTree = "<group>"; };
+		FDD2379988A9C1A902020D61 /* GPTProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTProvider.swift; sourceTree = "<group>"; };
+		FEE7F996D7DD4334B9CF07E8 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		FF5C4B078D82B5C7B7E88B92 /* AIBar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AIBar.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0AE4B2B770D524296F7157B2 /* GPT */ = {
+			isa = PBXGroup;
+			children = (
+				2F7A78024350DFE7B90FED20 /* GPTAPIClient.swift */,
+				FDD2379988A9C1A902020D61 /* GPTProvider.swift */,
+			);
+			path = GPT;
+			sourceTree = "<group>";
+		};
+		233F5FD8852794E14D6F21BE /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				6C27CCA9BCECB23CA9BC4946 /* AppSettings.swift */,
+				7E8A95F7FB522BEA9E144A7B /* CodexAuthController.swift */,
+				91077666E6A1A418D2BA22E3 /* CodexAuthStore.swift */,
+				DC33F4D2AC173B0ADD660EA4 /* NotificationService.swift */,
+				5D1B024C1BAB6D6E9E9CA577 /* ProviderAuthControllers.swift */,
+				20E834991B040F5D3EA67BD5 /* UninstallService.swift */,
+				303423F4DA65D5F92D4403E8 /* UsageViewModel.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		319F50649D06C5C977D86810 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				72498A931B8EDF7CD07F5186 /* MenuBarLabelView.swift */,
+				AABEDA5730B9D95F8881C993 /* PopoverView.swift */,
+				FEE7F996D7DD4334B9CF07E8 /* SettingsView.swift */,
+				A585B90AEDDB3025F4295209 /* StatusDot.swift */,
+				B2F61532BFCD65D331F8CB53 /* Auth */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		372440107ACCE6C22C421784 = {
+			isa = PBXGroup;
+			children = (
+				97774FF75F7DD56D21055E99 /* AIBar */,
+				73BF78E1BB00B1F6AB9064CC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		47C8B64587BE32F7C303E7AB /* Claude */ = {
+			isa = PBXGroup;
+			children = (
+				C82F6D48678DE5F014D889C4 /* ClaudeAPIClient.swift */,
+				6E9342C796B5EE30DF326E36 /* ClaudeAuthStore.swift */,
+				25A92A905CE959C49BDFD2E0 /* ClaudeProvider.swift */,
+			);
+			path = Claude;
+			sourceTree = "<group>";
+		};
+		5F9268DFF678AD52F5EF4FF8 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				C5CAD81F33736C2CFE9D191A /* L10n.swift */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		73BF78E1BB00B1F6AB9064CC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				065027B224F60D94C486DE58 /* AIBar.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8C2788131D50CD7014B400FB /* Codex */ = {
+			isa = PBXGroup;
+			children = (
+				4425488906869C079EEB8068 /* CodexAPIClient.swift */,
+				7D340C50DEAF0D99E496DBD2 /* CodexProvider.swift */,
+				0C2AFA6D7B2B6E553FA047E7 /* CodexRolloutReader.swift */,
+				48B1A38E34DD629D049625B5 /* CodexUsageDTO.swift */,
+			);
+			path = Codex;
+			sourceTree = "<group>";
+		};
+		8D9AE5D2C49050A1DB33177E /* Cursor */ = {
+			isa = PBXGroup;
+			children = (
+				E3D6BD080B282117701D639D /* CursorAPIClient.swift */,
+				80C4E033E51AFE6DA6A9B570 /* CursorAuthStore.swift */,
+				84496AFEAD85C9776DC753D2 /* CursorProvider.swift */,
+			);
+			path = Cursor;
+			sourceTree = "<group>";
+		};
+		959FEBF7014AB3BC546B7F06 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				8FC61BB5FDCF04DEAAC9155E /* ProviderRegistry.swift */,
+				9F201F9D259074016205639C /* UsageProvider.swift */,
+				47C8B64587BE32F7C303E7AB /* Claude */,
+				8C2788131D50CD7014B400FB /* Codex */,
+				8D9AE5D2C49050A1DB33177E /* Cursor */,
+				0AE4B2B770D524296F7157B2 /* GPT */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
+		97774FF75F7DD56D21055E99 /* AIBar */ = {
+			isa = PBXGroup;
+			children = (
+				FF5C4B078D82B5C7B7E88B92 /* AIBar.entitlements */,
+				1A0D43A3EE1B777A6689FAAA /* Info.plist */,
+				F56BD60DE74DE3915D8BE2FD /* App */,
+				5F9268DFF678AD52F5EF4FF8 /* Localization */,
+				FB98EE088946AA376A114332 /* Models */,
+				959FEBF7014AB3BC546B7F06 /* Providers */,
+				233F5FD8852794E14D6F21BE /* Services */,
+				319F50649D06C5C977D86810 /* Views */,
+			);
+			path = AIBar;
+			sourceTree = "<group>";
+		};
+		B2F61532BFCD65D331F8CB53 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				75DE6518E9D7AD68AFC501C5 /* ChatGPTLoginView.swift */,
+				72CC995FD19A0AAE5390C85F /* ClaudeLoginView.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		F56BD60DE74DE3915D8BE2FD /* App */ = {
+			isa = PBXGroup;
+			children = (
+				EF5F1D76C17C36AE4B70DD2A /* AIBarApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		FB98EE088946AA376A114332 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CBC1734EABD470B414ACF318 /* UsageSnapshot.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		688EA9BA5C4B12D99820DEC4 /* AIBar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3E0742E02E095F410787FDD8 /* Build configuration list for PBXNativeTarget "AIBar" */;
+			buildPhases = (
+				321114079F05FFD609A26B63 /* Sources */,
+				1A0B662A8754F6A90EEB3D1C /* Ensure AppIcon.icns */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AIBar;
+			packageProductDependencies = (
+			);
+			productName = AIBar;
+			productReference = 065027B224F60D94C486DE58 /* AIBar.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EA5BA88C0AA3AAC12D6EE71C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					688EA9BA5C4B12D99820DEC4 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 79C3E88C30C299F5276CE672 /* Build configuration list for PBXProject "AIBar" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 372440107ACCE6C22C421784;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 73BF78E1BB00B1F6AB9064CC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				688EA9BA5C4B12D99820DEC4 /* AIBar */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1A0B662A8754F6A90EEB3D1C /* Ensure AppIcon.icns */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Ensure AppIcon.icns";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nDEST=\"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\"\nmkdir -p \"$DEST\"\ncp \"${SRCROOT}/Branding/AppIcon.icns\" \"$DEST/AppIcon.icns\"\necho \"Embedded AppIcon.icns -> $DEST/AppIcon.icns\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		321114079F05FFD609A26B63 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				41D4BA478C243E26055C305E /* AIBarApp.swift in Sources */,
+				A74EF9E827484B8BB044D458 /* AppSettings.swift in Sources */,
+				5F2B69EA1E203A60B8508EA1 /* ChatGPTLoginView.swift in Sources */,
+				28B661BC918E4DE41307F0F2 /* ClaudeAPIClient.swift in Sources */,
+				FA1D6F5988DF3EA7440E426C /* ClaudeAuthStore.swift in Sources */,
+				502CE9A8EB3EDC69395DEE28 /* ClaudeLoginView.swift in Sources */,
+				2B6B81B0170B012A064C5C57 /* ClaudeProvider.swift in Sources */,
+				54CFB95950CA35053BF2B223 /* CodexAPIClient.swift in Sources */,
+				C956391840E50BB2DC8DB588 /* CodexAuthController.swift in Sources */,
+				61E91B619FC21816A39CC628 /* CodexAuthStore.swift in Sources */,
+				5D9C181CE8D091EBD00AFA61 /* CodexProvider.swift in Sources */,
+				FF807405DFD9790A6B4BB0AC /* CodexRolloutReader.swift in Sources */,
+				268E29ECDE9F27C817AEDE51 /* CodexUsageDTO.swift in Sources */,
+				8B7B4EA8547AB7CEBB117995 /* CursorAPIClient.swift in Sources */,
+				C67E433CAFCCA792617C9F3D /* CursorAuthStore.swift in Sources */,
+				EE0490C76B29D36576029AB3 /* CursorProvider.swift in Sources */,
+				1B006655B62F1F193BD1FC3E /* GPTAPIClient.swift in Sources */,
+				83EEA1C6C8FC59021DFF771E /* GPTProvider.swift in Sources */,
+				5BF72EACC77CDAD825F9367D /* L10n.swift in Sources */,
+				1F7B2A03A4F0C039A694EE41 /* MenuBarLabelView.swift in Sources */,
+				F489EC2821F5BFBED1F02425 /* NotificationService.swift in Sources */,
+				88265A476E7C7572025D9A90 /* PopoverView.swift in Sources */,
+				00271D85CDEBFF9C485062C3 /* ProviderAuthControllers.swift in Sources */,
+				A31C2A2ABB83120B387FE850 /* ProviderRegistry.swift in Sources */,
+				9894EB6EC7DE9FBD781B9A02 /* SettingsView.swift in Sources */,
+				71DE7E7ED7AC166793858067 /* StatusDot.swift in Sources */,
+				5F846CEAF2FA312D94864C8A /* UninstallService.swift in Sources */,
+				2D928C0AFEB6ED83436A1A41 /* UsageProvider.swift in Sources */,
+				5600197D69A1FE65D4CF0944 /* UsageSnapshot.swift in Sources */,
+				12493D3F038F10ABEFB5B5A0 /* UsageViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		5DFB518FDB170BFB4E3B2D03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AIBar/AIBar.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AIBar/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.stackmeter.ai;
+				PRODUCT_NAME = "Stack Meter AI";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+		9638FED1E43A9C2FAA6EAE12 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 12;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.6.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		C1B31BF73508DACC6B8CC86F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = AIBar/AIBar.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AIBar/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.stackmeter.ai;
+				PRODUCT_NAME = "Stack Meter AI";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		C3571133813DDC08B342D28B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 12;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.6.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3E0742E02E095F410787FDD8 /* Build configuration list for PBXNativeTarget "AIBar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C1B31BF73508DACC6B8CC86F /* Debug */,
+				5DFB518FDB170BFB4E3B2D03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		79C3E88C30C299F5276CE672 /* Build configuration list for PBXProject "AIBar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9638FED1E43A9C2FAA6EAE12 /* Debug */,
+				C3571133813DDC08B342D28B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EA5BA88C0AA3AAC12D6EE71C /* Project object */;
+}

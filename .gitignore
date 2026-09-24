@@ -1,0 +1,30 @@
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.xccheckout
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Distribution staging (keep dist/*.dmg if you want; ignore by default)
+dist/*.dmg
+dist/*.dmg.sha256
+dist/.*.rw.dmg
+
+# Generated icon intermediates (keep *.icns + *-1024.png)
+Design/icons/*.iconset/
+
+# macOS
+.DS_Store
+
+# SwiftPM
+.swiftpm/
+.build/
+
+# Secrets (never commit)
+.env
+*.pem
