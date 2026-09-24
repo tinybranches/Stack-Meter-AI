@@ -7,6 +7,14 @@ Format: version, date, then **Added** / **Changed** / **Fixed** / **Removed**.
 
 ---
 
+## 1.6.6 — 2026-09-24
+
+### Fixed
+
+- App icon missing in **System Settings → Notifications** (and related system lists): the App Icon asset catalog was never compiled into `Assets.car` because XcodeGen ignored `Branding/Assets.xcassets`. The catalog now lives under `AIBar/Assets.xcassets` and the package script fails if `Assets.car` is missing.
+
+---
+
 ## 1.6.5 — 2026-09-24
 
 ### Added

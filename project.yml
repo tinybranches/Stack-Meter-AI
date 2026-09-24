@@ -9,8 +9,8 @@ settings:
   base:
     SWIFT_VERSION: "5.9"
     MACOSX_DEPLOYMENT_TARGET: "14.0"
-    CURRENT_PROJECT_VERSION: 12
-    MARKETING_VERSION: "1.6.5"
+    CURRENT_PROJECT_VERSION: 13
+    MARKETING_VERSION: "1.6.6"
 schemes:
   AIBar:
     build:
@@ -39,21 +39,29 @@ targets:
       - path: AIBar
         excludes:
           - Resources/**
-          - Assets.xcassets/**
     resources:
-      - path: Branding/AppIcon.icns
-        buildPhase: resources
-      - path: Branding/Assets.xcassets
-        buildPhase: resources
-    postCompileScripts:
-      - name: Ensure AppIcon.icns
+      # Must live under AIBar/ — XcodeGen ignores Branding/*.xcassets for this target.
+      - path: AIBar/Assets.xcassets
+    postBuildScripts:
+      - name: Ensure AppIcon.icns + Assets.car
         basedOnDependencyAnalysis: false
         script: |
           set -e
           DEST="${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
           mkdir -p "$DEST"
-          cp "${SRCROOT}/Branding/AppIcon.icns" "$DEST/AppIcon.icns"
+          SRC="${SRCROOT}/Branding/AppIcon.icns"
+          if [[ ! -f "$SRC" ]]; then
+            SRC="${SRCROOT}/AIBar/Resources/AppIcon.icns"
+          fi
+          cp "$SRC" "$DEST/AppIcon.icns"
           echo "Embedded AppIcon.icns -> $DEST/AppIcon.icns"
+          # Notifications / System Settings read the compiled App Icon from Assets.car.
+          if [[ ! -f "$DEST/Assets.car" ]]; then
+            echo "error: Assets.car missing — AppIcon asset catalog did not compile" >&2
+            ls -la "$DEST" >&2 || true
+            exit 1
+          fi
+          echo "Assets.car OK ($(wc -c < "$DEST/Assets.car") bytes)"
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.stackmeter.ai

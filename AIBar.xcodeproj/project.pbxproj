@@ -23,6 +23,7 @@
 		5D9C181CE8D091EBD00AFA61 /* CodexProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D340C50DEAF0D99E496DBD2 /* CodexProvider.swift */; };
 		5F2B69EA1E203A60B8508EA1 /* ChatGPTLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DE6518E9D7AD68AFC501C5 /* ChatGPTLoginView.swift */; };
 		5F846CEAF2FA312D94864C8A /* UninstallService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E834991B040F5D3EA67BD5 /* UninstallService.swift */; };
+		60A48C9C0A60BC21DA7564C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A67F39DBF55FF585A8C479F /* Assets.xcassets */; };
 		61E91B619FC21816A39CC628 /* CodexAuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91077666E6A1A418D2BA22E3 /* CodexAuthStore.swift */; };
 		71DE7E7ED7AC166793858067 /* StatusDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A585B90AEDDB3025F4295209 /* StatusDot.swift */; };
 		83EEA1C6C8FC59021DFF771E /* GPTProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD2379988A9C1A902020D61 /* GPTProvider.swift */; };
@@ -49,6 +50,7 @@
 		303423F4DA65D5F92D4403E8 /* UsageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageViewModel.swift; sourceTree = "<group>"; };
 		4425488906869C079EEB8068 /* CodexAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodexAPIClient.swift; sourceTree = "<group>"; };
 		48B1A38E34DD629D049625B5 /* CodexUsageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodexUsageDTO.swift; sourceTree = "<group>"; };
+		4A67F39DBF55FF585A8C479F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5D1B024C1BAB6D6E9E9CA577 /* ProviderAuthControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderAuthControllers.swift; sourceTree = "<group>"; };
 		6C27CCA9BCECB23CA9BC4946 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		6E9342C796B5EE30DF326E36 /* ClaudeAuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeAuthStore.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				FF5C4B078D82B5C7B7E88B92 /* AIBar.entitlements */,
+				4A67F39DBF55FF585A8C479F /* Assets.xcassets */,
 				1A0D43A3EE1B777A6689FAAA /* Info.plist */,
 				F56BD60DE74DE3915D8BE2FD /* App */,
 				5F9268DFF678AD52F5EF4FF8 /* Localization */,
@@ -227,7 +230,8 @@
 			buildConfigurationList = 3E0742E02E095F410787FDD8 /* Build configuration list for PBXNativeTarget "AIBar" */;
 			buildPhases = (
 				321114079F05FFD609A26B63 /* Sources */,
-				1A0B662A8754F6A90EEB3D1C /* Ensure AppIcon.icns */,
+				3A0EBCE20839D7B57AA4A186 /* Resources */,
+				489168CA9E5436B51806EC7D /* Ensure AppIcon.icns + Assets.car */,
 			);
 			buildRules = (
 			);
@@ -273,8 +277,19 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		3A0EBCE20839D7B57AA4A186 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60A48C9C0A60BC21DA7564C7 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXShellScriptBuildPhase section */
-		1A0B662A8754F6A90EEB3D1C /* Ensure AppIcon.icns */ = {
+		489168CA9E5436B51806EC7D /* Ensure AppIcon.icns + Assets.car */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -284,14 +299,14 @@
 			);
 			inputPaths = (
 			);
-			name = "Ensure AppIcon.icns";
+			name = "Ensure AppIcon.icns + Assets.car";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\nDEST=\"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\"\nmkdir -p \"$DEST\"\ncp \"${SRCROOT}/Branding/AppIcon.icns\" \"$DEST/AppIcon.icns\"\necho \"Embedded AppIcon.icns -> $DEST/AppIcon.icns\"\n";
+			shellScript = "set -e\nDEST=\"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\"\nmkdir -p \"$DEST\"\nSRC=\"${SRCROOT}/Branding/AppIcon.icns\"\nif [[ ! -f \"$SRC\" ]]; then\n  SRC=\"${SRCROOT}/AIBar/Resources/AppIcon.icns\"\nfi\ncp \"$SRC\" \"$DEST/AppIcon.icns\"\necho \"Embedded AppIcon.icns -> $DEST/AppIcon.icns\"\n# Notifications / System Settings read the compiled App Icon from Assets.car.\nif [[ ! -f \"$DEST/Assets.car\" ]]; then\n  echo \"error: Assets.car missing — AppIcon asset catalog did not compile\" >&2\n  ls -la \"$DEST\" >&2 || true\n  exit 1\nfi\necho \"Assets.car OK ($(wc -c < \"$DEST/Assets.car\") bytes)\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -391,7 +406,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -410,7 +425,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.6.5;
+				MARKETING_VERSION = 1.6.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -477,7 +492,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -490,7 +505,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.6.5;
+				MARKETING_VERSION = 1.6.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";

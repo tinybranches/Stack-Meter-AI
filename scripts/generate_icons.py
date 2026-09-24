@@ -300,23 +300,27 @@ def main() -> int:
     to_icns(app_set, app_icns)
     to_icns(vol_set, vol_icns)
 
-    assets = os.path.join(BRANDING, "Assets.xcassets")
-    write_asset_catalog(app, assets)
+    # Branding copy (source of truth for packaging scripts)
+    branding_assets = os.path.join(BRANDING, "Assets.xcassets")
+    write_asset_catalog(app, branding_assets)
 
-    # Drop unused duplicates under AIBar/ (build uses Branding/ only).
-    for stale in (
-        os.path.join(RESOURCES, "AppIcon.icns"),
-        os.path.join(RESOURCES, "AppIcon.iconset"),
-        os.path.join(ROOT, "AIBar", "Assets.xcassets"),
-    ):
-        if os.path.isdir(stale):
-            shutil.rmtree(stale)
-        elif os.path.isfile(stale):
-            os.remove(stale)
+    # XcodeGen only embeds xcassets that live under AIBar/ — mirror there for the build.
+    aibar_assets = os.path.join(ROOT, "AIBar", "Assets.xcassets")
+    if os.path.isdir(aibar_assets):
+        shutil.rmtree(aibar_assets)
+    shutil.copytree(branding_assets, aibar_assets)
+
+    # Also keep AppIcon.icns next to the app sources for CFBundleIconFile.
+    os.makedirs(RESOURCES, exist_ok=True)
+    shutil.copy2(app_icns, os.path.join(RESOURCES, "AppIcon.icns"))
+    stale_iconset = os.path.join(RESOURCES, "AppIcon.iconset")
+    if os.path.isdir(stale_iconset):
+        shutil.rmtree(stale_iconset)
 
     print("App icon:", app_icns, os.path.getsize(app_icns), "bytes")
     print("DMG icon:", vol_icns, os.path.getsize(vol_icns), "bytes")
-    print("Asset catalog:", os.path.join(assets, "AppIcon.appiconset"))
+    print("Asset catalog (Branding):", os.path.join(branding_assets, "AppIcon.appiconset"))
+    print("Asset catalog (AIBar):   ", os.path.join(aibar_assets, "AppIcon.appiconset"))
     return 0
 
 
