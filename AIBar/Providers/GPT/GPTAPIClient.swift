@@ -1,6 +1,10 @@
 import Foundation
 
-/// ChatGPT (GPT) conversation / plan limits via undocumented backend endpoints.
+/// ChatGPT plan / chat usage via ChatGPT backend.
+///
+/// Historical `conversation/limits` often returns 404 now. Current plans expose
+/// the same rate-limit windows through `/wham/usage` (shared ChatGPT/Codex allowance
+/// on many Plus/Pro plans — see OpenAI usage docs).
 struct GPTAPIClient: Sendable {
     private let session: URLSession
     private let baseURL: URL
@@ -14,13 +18,29 @@ struct GPTAPIClient: Sendable {
     }
 
     func fetchLimits(credentials: CodexCredentials) async throws -> GPTLimitsResponse {
-        let paths = ["conversation/limits", "f/conversation/limits"]
-        var lastError: Error = ProviderError.badResponse("No ChatGPT limits endpoint responded.")
+        // Prefer chat-specific endpoints when they still exist; fall back to wham/usage.
+        let paths = [
+            "conversation/limits",
+            "f/conversation/limits",
+            "wham/usage",
+            "codex/usage",
+        ]
+        var lastError: Error = ProviderError.badResponse("No ChatGPT usage endpoint responded.")
         var sawUnauthorized = false
 
         for path in paths {
             do {
-                return try await get(path: path, credentials: credentials)
+                let data = try await getData(path: path, credentials: credentials)
+                if let limits = try? JSONDecoder().decode(GPTLimitsResponse.self, from: data),
+                   limits.hasUsablePayload
+                {
+                    return limits
+                }
+                // wham/usage shape (CodexUsageResponse) — map into GPTLimitsResponse.
+                if let usage = try? JSONDecoder().decode(CodexUsageResponse.self, from: data) {
+                    return GPTLimitsResponse(from: usage)
+                }
+                lastError = ProviderError.badResponse("Unrecognized ChatGPT usage payload from \(path).")
             } catch let error as ProviderError {
                 if case .unauthorized = error {
                     sawUnauthorized = true
@@ -37,14 +57,17 @@ struct GPTAPIClient: Sendable {
         throw lastError
     }
 
-    private func get(path: String, credentials: CodexCredentials) async throws -> GPTLimitsResponse {
+    private func getData(path: String, credentials: CodexCredentials) async throws -> Data {
         let url = baseURL.appending(path: path)
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.timeoutInterval = 20
         request.setValue("Bearer \(credentials.accessToken)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue("StackMeterAI/1.4", forHTTPHeaderField: "User-Agent")
+        request.setValue(
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Safari/605.1.15",
+            forHTTPHeaderField: "User-Agent"
+        )
         request.setValue("https://chatgpt.com/", forHTTPHeaderField: "Referer")
         if let accountID = credentials.accountID, !accountID.isEmpty {
             request.setValue(accountID, forHTTPHeaderField: "ChatGPT-Account-Id")
@@ -64,7 +87,7 @@ struct GPTAPIClient: Sendable {
 
         switch http.statusCode {
         case 200 ... 299:
-            break
+            return data
         case 401, 403:
             throw ProviderError.unauthorized
         case 429:
@@ -72,12 +95,6 @@ struct GPTAPIClient: Sendable {
         default:
             let body = String(data: data, encoding: .utf8) ?? ""
             throw ProviderError.badResponse("HTTP \(http.statusCode): \(body.prefix(200))")
-        }
-
-        do {
-            return try JSONDecoder().decode(GPTLimitsResponse.self, from: data)
-        } catch {
-            throw ProviderError.badResponse("Could not parse ChatGPT limits: \(error.localizedDescription)")
         }
     }
 }
@@ -93,9 +110,20 @@ struct GPTLimitsResponse: Decodable, Sendable {
     let planType: String?
     let planName: String?
 
-    // Nested / alternate shapes
     let rateLimit: CodexRateLimit?
     let credits: CodexCredits?
+
+    /// True when we can render at least one meter or spend figure.
+    var hasUsablePayload: Bool {
+        rateLimit?.primaryWindow != nil
+            || rateLimit?.secondaryWindow != nil
+            || usedPercent != nil
+            || remainingPercent != nil
+            || messageCap != nil
+            || credits?.balance?.value != nil
+            || planType != nil
+            || planName != nil
+    }
 
     enum CodingKeys: String, CodingKey {
         case rateLimitReached = "rate_limit_reached"
@@ -109,5 +137,42 @@ struct GPTLimitsResponse: Decodable, Sendable {
         case planName = "plan_name"
         case rateLimit = "rate_limit"
         case credits
+    }
+
+    init(
+        rateLimitReached: Bool? = nil,
+        messageCap: Double? = nil,
+        messageCapWindow: Double? = nil,
+        resetTime: Double? = nil,
+        limitReached: Bool? = nil,
+        usedPercent: Double? = nil,
+        remainingPercent: Double? = nil,
+        planType: String? = nil,
+        planName: String? = nil,
+        rateLimit: CodexRateLimit? = nil,
+        credits: CodexCredits? = nil
+    ) {
+        self.rateLimitReached = rateLimitReached
+        self.messageCap = messageCap
+        self.messageCapWindow = messageCapWindow
+        self.resetTime = resetTime
+        self.limitReached = limitReached
+        self.usedPercent = usedPercent
+        self.remainingPercent = remainingPercent
+        self.planType = planType
+        self.planName = planName
+        self.rateLimit = rateLimit
+        self.credits = credits
+    }
+
+    init(from usage: CodexUsageResponse) {
+        self.init(
+            rateLimitReached: usage.rateLimit?.limitReached,
+            limitReached: usage.rateLimit?.limitReached,
+            planType: usage.planType,
+            planName: usage.planName,
+            rateLimit: usage.rateLimit,
+            credits: usage.credits
+        )
     }
 }

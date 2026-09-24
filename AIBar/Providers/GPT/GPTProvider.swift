@@ -122,8 +122,10 @@ struct GPTProvider: UsageProvider {
             || limits.limitReached == true
 
         let remainingNote: String? = {
-            guard let cap = limits.messageCap, cap > 0, windows.contains(where: { $0.id == "message_cap" }) else {
-                return windows.isEmpty ? "popover.noWindows" : nil
+            if windows.isEmpty { return "popover.noWindows" }
+            // When data came from shared wham/usage windows, hint once.
+            if limits.rateLimit != nil, limits.messageCap == nil, limits.usedPercent == nil {
+                return "gpt.sharedUsageHint"
             }
             return nil
         }()
@@ -137,7 +139,7 @@ struct GPTProvider: UsageProvider {
             spend: spend,
             tokens: TokenSummary(),
             planName: limits.planName ?? limits.planType ?? "ChatGPT",
-            message: remainingNote ?? (windows.isEmpty ? "popover.noWindows" : nil)
+            message: remainingNote
         )
     }
 

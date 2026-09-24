@@ -7,6 +7,14 @@ Format: version, date, then **Added** / **Changed** / **Fixed** / **Removed**.
 
 ---
 
+## 1.7.1 — 2026-09-24
+
+### Fixed
+
+- ChatGPT tab showing `HTTP 404 Not Found` after login: `conversation/limits` is gone; fall back to `/wham/usage` (same plan windows ChatGPT exposes today, often shared with Codex) and stop duplicating error text in the popover.
+
+---
+
 ## 1.7.0 — 2026-09-24
 
 ### Added

@@ -111,6 +111,14 @@ struct PopoverView: View {
                     RateWindowRow(window: window)
                 }
             }
+            if let message = L10n.text(snapshot.message),
+               snapshot.status != .unavailable
+            {
+                Text(message)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
         }
 
         if snapshot.spend.hasAnyValue || snapshot.tokens.hasAnyValue {
@@ -147,7 +155,8 @@ struct PopoverView: View {
         }
 
         if let message = L10n.text(snapshot.message),
-           snapshot.status == .unavailable || snapshot.status == .rateLimited
+           snapshot.status == .unavailable,
+           !snapshot.windows.isEmpty
         {
             Text(message)
                 .font(.caption)

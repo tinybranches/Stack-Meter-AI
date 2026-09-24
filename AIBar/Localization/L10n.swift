@@ -175,6 +175,10 @@ enum L10n {
             .english: "No rate-limit windows reported.",
             .ukrainian: "Вікна лімітів не повідомлені.",
         ],
+        "gpt.sharedUsageHint": [
+            .english: "Plan usage windows (often shared with Codex on Plus/Pro). Separate chat-only meters are no longer exposed by ChatGPT’s API.",
+            .ukrainian: "Вікна використання плану (на Plus/Pro часто спільні з Codex). Окремі ліміти лише для чату ChatGPT API більше не віддає.",
+        ],
         "popover.spend": [.english: "Spend", .ukrainian: "Витрати"],
         "popover.credits": [.english: "Credits $%.2f", .ukrainian: "Кредити $%.2f"],
         "popover.usedUSD": [.english: "Used $%.2f", .ukrainian: "Використано $%.2f"],
