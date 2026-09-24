@@ -96,13 +96,21 @@ final class CodexAuthController: ObservableObject {
             },
             onCancel: { [weak self] in
                 self?.closeLoginWindow()
+            },
+            onImportCLI: { [weak self] in
+                Task { @MainActor in
+                    let ok = await self?.authorizeFromCLILogin() ?? false
+                    if ok {
+                        self?.closeLoginWindow()
+                    }
+                }
             }
         )
         let hosting = NSHostingController(rootView: root)
         let window = NSWindow(contentViewController: hosting)
         window.title = L10n.tr("auth.chatgpt.loginTitle")
         window.styleMask = [.titled, .closable, .resizable]
-        window.setContentSize(NSSize(width: 780, height: 680))
+        window.setContentSize(NSSize(width: 800, height: 720))
         window.center()
         window.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)

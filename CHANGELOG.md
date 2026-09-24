@@ -7,6 +7,14 @@ Format: version, date, then **Added** / **Changed** / **Fixed** / **Removed**.
 
 ---
 
+## 1.6.8 — 2026-09-24
+
+### Fixed
+
+- ChatGPT login window hanging on a blank white page during Google OAuth: stop spoofing Safari UA / stuffing popups into the same view; show load spinner + timeout; open real popup windows; promote **Codex CLI** (`codex login` → import) as the reliable path.
+
+---
+
 ## 1.6.7 — 2026-09-24
 
 ### Fixed

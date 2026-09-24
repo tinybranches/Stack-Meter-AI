@@ -203,6 +203,34 @@ enum L10n {
             .english: "Google sign-in: prefer password via “Another way” if Passkey/Bluetooth fails.",
             .ukrainian: "Вхід Google: якщо Passkey/Bluetooth не спрацював — «Інший спосіб» → пароль.",
         ],
+        "auth.chatgpt.cliPrimary": [
+            .english: "Most reliable: run `codex login` in Terminal, then import the session here. In-app Google login often shows a blank page.",
+            .ukrainian: "Найнадійніше: у Терміналі виконайте `codex login`, потім імпортуйте сесію тут. Вхід Google у вікні часто дає білий екран.",
+        ],
+        "auth.chatgpt.openSafari": [
+            .english: "Open ChatGPT in Safari",
+            .ukrainian: "Відкрити ChatGPT у Safari",
+        ],
+        "auth.chatgpt.copyCLI": [
+            .english: "Copy `codex login`",
+            .ukrainian: "Копіювати `codex login`",
+        ],
+        "auth.chatgpt.cliCopied": [
+            .english: "Copied `codex login` — paste it in Terminal, finish login, then import.",
+            .ukrainian: "Скопійовано `codex login` — вставте в Термінал, завершіть вхід, потім імпортуйте.",
+        ],
+        "auth.chatgpt.loadingPage": [
+            .english: "Loading ChatGPT…",
+            .ukrainian: "Завантаження ChatGPT…",
+        ],
+        "auth.chatgpt.loadFailed": [
+            .english: "The login page didn’t load (common with Google in this window). Reload, or use Codex CLI import above.",
+            .ukrainian: "Сторінка входу не завантажилась (типово для Google у цьому вікні). Перезавантажте або скористайтесь імпортом Codex CLI вище.",
+        ],
+        "auth.chatgpt.reload": [
+            .english: "Reload",
+            .ukrainian: "Перезавантажити",
+        ],
         "auth.chatgpt.checkingSession": [
             .english: "Waiting for login…",
             .ukrainian: "Очікування входу…",
