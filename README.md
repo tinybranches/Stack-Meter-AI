@@ -9,9 +9,11 @@ Menu-bar utility for macOS that shows how much of your AI plan you have left —
 
 2. **You authorize each account once**  
    Credentials are stored in the macOS Keychain (not in the app folder).  
-   - **Codex** — ChatGPT account login (in-app browser) or import from Codex CLI `~/.codex/auth.json`  
+   Safari/Chrome cookies are **not** shared with Stack Meter.  
+   On launch, the app auto-imports a local session when possible:  
+   - **Codex** — ChatGPT login (in-app window) or import from Codex CLI `~/.codex/auth.json`  
    - **Cursor** — reads the local Cursor IDE session (`state.vscdb`) and copies the token into Keychain  
-   - **Claude** — sign in via Claude.ai in an in-app browser; the `sessionKey` cookie is saved  
+   - **Claude** — import from Claude Desktop local cookies, or Claude.ai login in an in-app window  
 
 3. **It polls usage APIs on a timer** (default every 60s, adjustable in Settings)  
    Each enabled provider is fetched in the background so the menu bar stays responsive.  

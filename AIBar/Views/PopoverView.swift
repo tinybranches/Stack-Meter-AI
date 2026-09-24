@@ -217,13 +217,10 @@ private struct AuthNeededView: View {
 
             switch viewModel.selectedProviderID {
             case "codex":
-                Button {
-                    viewModel.authorizeChatGPTBrowser()
-                } label: {
-                    Label(L10n.tr("auth.chatgpt.browserLogin"), systemImage: "globe")
-                }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.small)
+                Text(L10n.tr("auth.localHint.codex"))
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
 
                 if viewModel.codexAuth.hasCLILoginAvailable {
                     Button {
@@ -231,9 +228,25 @@ private struct AuthNeededView: View {
                     } label: {
                         Label(L10n.tr("auth.chatgpt.fromCLI"), systemImage: "terminal")
                     }
-                    .buttonStyle(.bordered)
+                    .buttonStyle(.borderedProminent)
                     .controlSize(.small)
                     .disabled(viewModel.codexAuth.isBusy)
+
+                    Button {
+                        viewModel.authorizeChatGPTBrowser()
+                    } label: {
+                        Label(L10n.tr("auth.chatgpt.browserLogin"), systemImage: "globe")
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                } else {
+                    Button {
+                        viewModel.authorizeChatGPTBrowser()
+                    } label: {
+                        Label(L10n.tr("auth.chatgpt.browserLogin"), systemImage: "globe")
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.small)
                 }
 
                 if let error = viewModel.codexAuth.errorMessage {
@@ -244,6 +257,11 @@ private struct AuthNeededView: View {
                 }
 
             case "cursor":
+                Text(L10n.tr("auth.localHint.cursor"))
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+
                 Button {
                     viewModel.authorizeCursor()
                 } label: {
@@ -251,7 +269,13 @@ private struct AuthNeededView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .controlSize(.small)
-                .disabled(viewModel.cursorAuth.isBusy)
+                .disabled(viewModel.cursorAuth.isBusy || !viewModel.cursorAuth.hasLocalCursorLogin)
+
+                if !viewModel.cursorAuth.hasLocalCursorLogin {
+                    Text(L10n.tr("auth.cursor.noIDE"))
+                        .font(.caption2)
+                        .foregroundStyle(.orange)
+                }
 
                 if let error = viewModel.cursorAuth.errorMessage {
                     Text(error).font(.caption2).foregroundStyle(.red)
@@ -261,13 +285,41 @@ private struct AuthNeededView: View {
                 }
 
             case "claude":
-                Button {
-                    viewModel.authorizeClaudeBrowser()
-                } label: {
-                    Label(L10n.tr("auth.claude.browserLogin"), systemImage: "globe")
+                Text(L10n.tr("auth.localHint.claude"))
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                if viewModel.claudeAuth.hasLocalDesktopLogin {
+                    Button {
+                        viewModel.authorizeClaudeFromDesktop()
+                    } label: {
+                        Label(L10n.tr("auth.claude.fromDesktop"), systemImage: "laptopcomputer")
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.small)
+                    .disabled(viewModel.claudeAuth.isBusy)
+
+                    Button {
+                        viewModel.authorizeClaudeBrowser()
+                    } label: {
+                        Label(L10n.tr("auth.claude.browserLogin"), systemImage: "ellipsis.circle")
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                } else {
+                    Button {
+                        viewModel.authorizeClaudeBrowser()
+                    } label: {
+                        Label(L10n.tr("auth.claude.browserLogin"), systemImage: "person.crop.circle.badge.plus")
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.small)
+
+                    Text(L10n.tr("auth.claude.noDesktop"))
+                        .font(.caption2)
+                        .foregroundStyle(.orange)
                 }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.small)
 
                 if let error = viewModel.claudeAuth.errorMessage {
                     Text(error).font(.caption2).foregroundStyle(.red)

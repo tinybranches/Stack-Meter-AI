@@ -89,7 +89,40 @@ final class UsageViewModel: ObservableObject {
         guard !didStart else { return }
         didStart = true
         notifications.promptOnFirstLaunchIfNeeded()
-        restartPolling()
+        Task {
+            await importLocalSessionsIfNeeded()
+            restartPolling()
+        }
+    }
+
+    /// Pick up sessions already present on this Mac (Codex CLI / Cursor IDE)
+    /// without forcing a separate browser login. Safari/Chrome cookies are NOT shared.
+    private func importLocalSessionsIfNeeded() async {
+        var imported = false
+
+        if !codexAuth.isAuthorized, CodexAuthStore.hasCLILoginAvailable {
+            if await codexAuth.authorizeFromCLILogin() {
+                imported = true
+            }
+        }
+
+        if !cursorAuth.isAuthorized, CursorAuthStore.hasLocalCursorLogin {
+            if await cursorAuth.authorizeFromLocalIDE() {
+                imported = true
+            }
+        }
+
+        if !claudeAuth.isAuthorized, ClaudeAuthStore.hasLocalDesktopLogin {
+            if await claudeAuth.authorizeFromLocalDesktop() {
+                imported = true
+            }
+        }
+
+        if imported {
+            codexAuth.refreshState()
+            cursorAuth.refreshState()
+            claudeAuth.refreshState()
+        }
     }
 
     func requestNotificationPermissionFromSettings() {
@@ -143,6 +176,13 @@ final class UsageViewModel: ObservableObject {
         waitForAuthorization(isReady: { [weak self] in self?.claudeAuth.isAuthorized == true }, attempts: 120)
     }
 
+    func authorizeClaudeFromDesktop() {
+        Task {
+            let ok = await claudeAuth.authorizeFromLocalDesktop()
+            if ok { await refreshAll() }
+        }
+    }
+
     func signOutCodex() {
         authWaitTask?.cancel()
         authWaitTask = nil
@@ -176,6 +216,8 @@ final class UsageViewModel: ObservableObject {
     }
 
     func quit() {
+        guard QuitConfirm.askUser() else { return }
+        QuitConfirm.bypass = true
         stop()
         NSApp.terminate(nil)
     }

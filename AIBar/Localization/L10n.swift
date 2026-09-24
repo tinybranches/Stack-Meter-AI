@@ -128,6 +128,14 @@ enum L10n {
         "common.refreshing": [.english: "Refreshing…", .ukrainian: "Оновлення…"],
         "common.settings": [.english: "Settings", .ukrainian: "Налаштування"],
         "common.quit": [.english: "Quit", .ukrainian: "Вийти"],
+        "quit.confirmTitle": [
+            .english: "Quit Stack Meter AI?",
+            .ukrainian: "Вийти зі Stack Meter AI?",
+        ],
+        "quit.confirmMessage": [
+            .english: "Usage tracking in the menu bar will stop until you open the app again.",
+            .ukrainian: "Відстеження лімітів у меню-барі зупиниться, доки ви знову не відкриєте застосунок.",
+        ],
         "common.status": [.english: "Status", .ukrainian: "Статус"],
 
         "instance.alreadyTitle": [
@@ -201,8 +209,20 @@ enum L10n {
         ],
         "auth.chatgpt.title": [.english: "Authorize Codex", .ukrainian: "Авторизувати Codex"],
         "auth.chatgpt.needed": [
-            .english: "Sign in with your ChatGPT account to track Codex usage.",
-            .ukrainian: "Увійдіть через обліковий запис ChatGPT, щоб бачити ліміти Codex.",
+            .english: "Stack Meter needs its own Codex authorization (Safari login is separate). If Codex CLI is already signed in on this Mac, import that session.",
+            .ukrainian: "Stack Meter потрібна своя авторизація Codex (вхід у Safari — окремо). Якщо Codex CLI уже залогінений на цьому Mac — імпортуйте цю сесію.",
+        ],
+        "auth.localHint.codex": [
+            .english: "Safari/Chrome cookies are not shared. Use Codex CLI import if you already ran `codex login`, or sign in once in the app window.",
+            .ukrainian: "Cookies Safari/Chrome не спільні з цим застосунком. Якщо вже робили `codex login` — імпортуйте CLI; або увійдіть один раз у вікні застосунку.",
+        ],
+        "auth.localHint.cursor": [
+            .english: "Uses the Cursor app login on this Mac (not the website). Sign in to the Cursor IDE first, then authorize here — or we import it automatically on launch when possible.",
+            .ukrainian: "Береться вхід із застосунку Cursor на цьому Mac (не з сайту). Спочатку увійдіть у Cursor IDE, потім авторизуйте тут — або ми підхопимо сесію автоматично при запуску.",
+        ],
+        "auth.localHint.claude": [
+            .english: "Browser cookies are not shared. If Claude Desktop is signed in on this Mac, import that session — or sign in once in the app window.",
+            .ukrainian: "Cookies браузера не спільні. Якщо Claude Desktop уже залогінений на цьому Mac — імпортуйте цю сесію; або увійдіть один раз у вікні застосунку.",
         ],
         "auth.chatgpt.expired": [
             .english: "ChatGPT session expired. Sign in again.",
@@ -430,8 +450,8 @@ enum L10n {
 
         "auth.cursor.title": [.english: "Authorize Cursor", .ukrainian: "Авторизувати Cursor"],
         "auth.cursor.needed": [
-            .english: "Cursor is not authorized yet. Use your local Cursor IDE login.",
-            .ukrainian: "Cursor ще не авторизований. Використайте локальний вхід Cursor IDE.",
+            .english: "Cursor is not authorized yet. Sign in to the Cursor app on this Mac, then authorize (or wait for auto-import on next launch).",
+            .ukrainian: "Cursor ще не авторизований. Увійдіть у застосунок Cursor на цьому Mac, потім авторизуйте (або зачекайте автоімпорт при наступному запуску).",
         ],
         "auth.cursor.authorize": [
             .english: "Authorize with Cursor IDE login",
@@ -457,28 +477,84 @@ enum L10n {
 
         "auth.claude.title": [.english: "Authorize Claude", .ukrainian: "Авторизувати Claude"],
         "auth.claude.needed": [
-            .english: "Claude is not authorized yet. Sign in with your Claude.ai account.",
-            .ukrainian: "Claude ще не авторизований. Увійдіть через обліковий запис Claude.ai.",
+            .english: "Claude is not authorized yet. Import Claude Desktop login, or sign in with Claude.ai.",
+            .ukrainian: "Claude ще не авторизований. Імпортуйте вхід Claude Desktop або увійдіть через Claude.ai.",
         ],
         "auth.claude.browserLogin": [
-            .english: "Sign in with Claude.ai",
-            .ukrainian: "Увійти через Claude.ai",
+            .english: "Authorize Claude…",
+            .ukrainian: "Авторизувати Claude…",
+        ],
+        "auth.claude.fromDesktop": [
+            .english: "Authorize with Claude Desktop",
+            .ukrainian: "Авторизувати з Claude Desktop",
+        ],
+        "auth.claude.noDesktop": [
+            .english: "Claude Desktop not found. Install/sign in to Claude.app, or use the browser login.",
+            .ukrainian: "Claude Desktop не знайдено. Встановіть/увійдіть у Claude.app або використайте вхід через браузер.",
+        ],
+        "auth.claude.noDesktopSession": [
+            .english: "No Claude Desktop session found. Open Claude.app and sign in, then try again.",
+            .ukrainian: "Сесію Claude Desktop не знайдено. Відкрийте Claude.app, увійдіть, потім спробуйте знову.",
+        ],
+        "auth.claude.keychainDenied": [
+            .english: "macOS blocked access to Claude Safe Storage. Click Allow when prompted, then try again.",
+            .ukrainian: "macOS заблокував доступ до Claude Safe Storage. Натисніть Allow у запиті, потім спробуйте знову.",
         ],
         "auth.claude.hint": [
-            .english: "Opens a secure browser window to Claude.ai and saves the session in Keychain.",
-            .ukrainian: "Відкриває безпечне вікно Claude.ai і зберігає сесію в Keychain.",
+            .english: "Prefers Claude Desktop session on this Mac. Browser cookies alone are not shared; otherwise use the in-app Claude.ai login.",
+            .ukrainian: "Спочатку береться сесія Claude Desktop на цьому Mac. Cookies браузера самі по собі не підходять; інакше — вхід Claude.ai у вікні застосунку.",
         ],
         "auth.claude.loginTitle": [
             .english: "Claude.ai login",
             .ukrainian: "Вхід Claude.ai",
         ],
         "auth.claude.loginHint": [
-            .english: "Sign in to Claude.ai in the window below.",
-            .ukrainian: "Увійдіть у Claude.ai у вікні нижче.",
+            .english: "Claude.ai blocks in-app browsers. Use Claude Desktop import or paste the sessionKey cookie from Safari.",
+            .ukrainian: "Claude.ai блокує вбудований браузер. Імпортуйте Claude Desktop або вставте cookie sessionKey із Safari.",
+        ],
+        "auth.claude.noWebViewExplain": [
+            .english: "The embedded browser stays blank on purpose — Claude.ai/Cloudflare blocks it. Use one of the options below.",
+            .ukrainian: "Вбудований браузер лишається білим навмисно — Claude.ai/Cloudflare його блокує. Скористайтесь одним із варіантів нижче.",
+        ],
+        "auth.claude.stepDesktopTitle": [
+            .english: "1. Recommended — Claude Desktop",
+            .ukrainian: "1. Рекомендовано — Claude Desktop",
+        ],
+        "auth.claude.stepDesktopBody": [
+            .english: "If Claude.app is signed in on this Mac, import that session. macOS may ask to allow “Claude Safe Storage” — choose Allow.",
+            .ukrainian: "Якщо Claude.app уже залогінений на цьому Mac — імпортуйте сесію. macOS може попросити доступ до «Claude Safe Storage» — натисніть Allow.",
+        ],
+        "auth.claude.stepSafariTitle": [
+            .english: "2. Or paste sessionKey from Safari",
+            .ukrainian: "2. Або вставте sessionKey із Safari",
+        ],
+        "auth.claude.stepSafariBody": [
+            .english: "Open Claude.ai in Safari → sign in → Develop/Web Inspector → Storage → Cookies → copy the sessionKey value (starts with sk-ant-).",
+            .ukrainian: "Відкрийте Claude.ai у Safari → увійдіть → Web Inspector → Storage → Cookies → скопіюйте значення sessionKey (починається з sk-ant-).",
         ],
         "auth.claude.checkingCookies": [
             .english: "Waiting for login…",
             .ukrainian: "Очікування входу…",
+        ],
+        "auth.claude.desktopPrimary": [
+            .english: "Most reliable: authorize from Claude Desktop on this Mac.",
+            .ukrainian: "Найстабільніше: авторизація з Claude Desktop на цьому Mac.",
+        ],
+        "auth.claude.openSafari": [
+            .english: "Open Claude.ai in Safari",
+            .ukrainian: "Відкрити Claude.ai у Safari",
+        ],
+        "auth.claude.safariHint": [
+            .english: "After signing in, copy the sessionKey cookie and paste it below.",
+            .ukrainian: "Після входу скопіюйте cookie sessionKey і вставте нижче.",
+        ],
+        "auth.claude.pasteKey": [
+            .english: "Paste sessionKey (sk-ant-…)",
+            .ukrainian: "Вставити sessionKey (sk-ant-…)",
+        ],
+        "auth.claude.useKey": [
+            .english: "Authorize",
+            .ukrainian: "Авторизувати",
         ],
         "auth.claude.success": [.english: "Claude authorized.", .ukrainian: "Claude авторизовано."],
         "auth.claude.expired": [
@@ -486,8 +562,8 @@ enum L10n {
             .ukrainian: "Сесію Claude завершено. Увійдіть знову.",
         ],
         "auth.claude.noOrg": [
-            .english: "Could not find a Claude organization for this account.",
-            .ukrainian: "Не знайдено організацію Claude для цього акаунта.",
+            .english: "No Claude chat organization found for this session. Open claude.ai once, then sign in again here.",
+            .ukrainian: "Для цієї сесії не знайдено Claude chat-організацію. Відкрийте claude.ai один раз, потім увійдіть тут знову.",
         ],
         "auth.claude.emptyKey": [
             .english: "Session key is empty.",

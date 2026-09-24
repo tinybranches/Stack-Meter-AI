@@ -52,6 +52,7 @@ enum UninstallService {
 
         // 8) Quit — DMG remains available for a fresh install anytime.
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            QuitConfirm.bypass = true
             NSApp.terminate(nil)
         }
     }

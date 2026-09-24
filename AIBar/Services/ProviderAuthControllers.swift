@@ -15,6 +15,9 @@ final class CursorAuthController: ObservableObject {
 
     func refreshState() {
         isAuthorized = CursorAuthStore.isAuthorized
+        if !isAuthorized {
+            statusMessage = nil
+        }
     }
 
     func authorizeFromLocalIDE() async -> Bool {
@@ -54,8 +57,15 @@ final class ClaudeAuthController: ObservableObject {
 
     private var loginWindow: NSWindow?
 
+    var hasLocalDesktopLogin: Bool {
+        ClaudeAuthStore.hasLocalDesktopLogin
+    }
+
     func refreshState() {
         isAuthorized = ClaudeAuthStore.isAuthorized
+        if !isAuthorized {
+            statusMessage = nil
+        }
     }
 
     func openBrowserLogin() {
@@ -63,40 +73,80 @@ final class ClaudeAuthController: ObservableObject {
         presentLoginWindow()
     }
 
+    func authorizeFromLocalDesktop() async -> Bool {
+        isBusy = true
+        errorMessage = nil
+        statusMessage = L10n.tr("auth.connecting")
+        defer { isBusy = false }
+
+        do {
+            let credentials = try await ClaudeAuthStore.authorizeFromLocalDesktop()
+            // Validate against usage API before claiming success.
+            let api = ClaudeAPIClient()
+            let orgs = try await api.fetchOrganizations(sessionKey: credentials.sessionKey)
+            guard let orgID = ClaudeAPIClient.resolveOrganizationID(
+                in: orgs,
+                preferredID: credentials.organizationID
+            ) else {
+                errorMessage = L10n.tr("auth.claude.noOrg")
+                statusMessage = nil
+                isAuthorized = false
+                return false
+            }
+            _ = try await api.fetchUsage(sessionKey: credentials.sessionKey, organizationID: orgID)
+            try ClaudeAuthStore.save(
+                ClaudeCredentials(sessionKey: credentials.sessionKey, organizationID: orgID)
+            )
+            isAuthorized = true
+            statusMessage = L10n.tr("auth.claude.success")
+            return true
+        } catch {
+            errorMessage = error.localizedDescription
+            statusMessage = nil
+            isAuthorized = false
+            return false
+        }
+    }
+
     func authorizeWithSessionKey(_ sessionKey: String) async -> Bool {
         isBusy = true
         errorMessage = nil
+        statusMessage = L10n.tr("auth.connecting")
         defer { isBusy = false }
 
         let trimmed = sessionKey.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else {
             errorMessage = L10n.tr("auth.claude.emptyKey")
+            statusMessage = nil
             return false
         }
 
         do {
-            // Resolve org up-front when possible.
             let api = ClaudeAPIClient()
             let orgs = try await api.fetchOrganizations(sessionKey: trimmed)
-            let orgID = orgs.first?.uuid
+            guard let orgID = ClaudeAPIClient.resolveOrganizationID(in: orgs) else {
+                errorMessage = L10n.tr("auth.claude.noOrg")
+                statusMessage = nil
+                isAuthorized = false
+                return false
+            }
+            // Prove the session can read usage before claiming success.
+            _ = try await api.fetchUsage(sessionKey: trimmed, organizationID: orgID)
             try ClaudeAuthStore.save(ClaudeCredentials(sessionKey: trimmed, organizationID: orgID))
             isAuthorized = true
             statusMessage = L10n.tr("auth.claude.success")
             closeLoginWindow()
             return true
+        } catch ProviderError.unauthorized {
+            errorMessage = L10n.tr("auth.claude.expired")
+            statusMessage = nil
+            isAuthorized = false
+            return false
         } catch {
-            // Still save session key so provider can retry org lookup.
-            do {
-                try ClaudeAuthStore.save(ClaudeCredentials(sessionKey: trimmed, organizationID: nil))
-                isAuthorized = true
-                statusMessage = L10n.tr("auth.claude.success")
-                closeLoginWindow()
-                return true
-            } catch {
-                errorMessage = error.localizedDescription
-                isAuthorized = false
-                return false
-            }
+            errorMessage = error.localizedDescription
+            statusMessage = nil
+            isAuthorized = false
+            return false
         }
     }
 
@@ -122,13 +172,21 @@ final class ClaudeAuthController: ObservableObject {
             },
             onCancel: { [weak self] in
                 self?.closeLoginWindow()
+            },
+            onImportDesktop: { [weak self] in
+                Task { @MainActor in
+                    let ok = await self?.authorizeFromLocalDesktop() ?? false
+                    if ok {
+                        self?.closeLoginWindow()
+                    }
+                }
             }
         )
         let hosting = NSHostingController(rootView: root)
         let window = NSWindow(contentViewController: hosting)
         window.title = L10n.tr("auth.claude.loginTitle")
         window.styleMask = [.titled, .closable, .resizable]
-        window.setContentSize(NSSize(width: 760, height: 600))
+        window.setContentSize(NSSize(width: 560, height: 500))
         window.center()
         window.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)

@@ -14,10 +14,23 @@ enum ClaudeAuthStore {
         (try? loadFromKeychain()) != nil
     }
 
+    static var hasLocalDesktopLogin: Bool {
+        ClaudeDesktopSession.isAvailable
+    }
+
     static func loadAuthorized() throws -> ClaudeCredentials {
         guard let credentials = try loadFromKeychain() else {
             throw ProviderError.notAuthenticated("auth.claude.needed")
         }
+        return credentials
+    }
+
+    @discardableResult
+    static func authorizeFromLocalDesktop() async throws -> ClaudeCredentials {
+        let credentials = try await Task.detached(priority: .userInitiated) {
+            try ClaudeDesktopSession.readCredentials()
+        }.value
+        try save(credentials)
         return credentials
     }
 

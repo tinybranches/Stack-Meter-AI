@@ -7,6 +7,65 @@ Format: version, date, then **Added** / **Changed** / **Fixed** / **Removed**.
 
 ---
 
+## 1.8.7 — 2026-09-24
+
+### Fixed
+
+- Removed the blank Claude WKWebView entirely (Claude.ai/Cloudflare blocks embedded browsers). Login is now Claude Desktop import or paste `sessionKey` from Safari.
+
+---
+
+## 1.8.6 — 2026-09-24
+
+### Fixed
+
+- Claude in-app browser login hanging on a blank white page: stop spoofing Safari’s user-agent, add load watchdog / reload, and surface Claude Desktop + Safari + paste-sessionKey fallbacks in the login window.
+
+---
+
+## 1.8.5 — 2026-09-24
+
+### Added
+
+- Quit confirmation: closing via Quit / ⌘Q asks “Quit Stack Meter AI?” before exiting (uninstall and single-instance exits skip the prompt).
+
+---
+
+## 1.8.4 — 2026-09-24
+
+### Added
+
+- Claude Desktop auto-import: when Claude.app is signed in on this Mac, Stack Meter reads its local session cookies (with a one-time Keychain Allow prompt for “Claude Safe Storage”) — no separate browser login required.
+
+---
+
+## 1.8.3 — 2026-09-24
+
+### Fixed
+
+- Claude authorize could show “authorized” then immediately “session expired”: the app picked the first organization (often the API console org without `chat`) and treated the resulting 403 as an expired session.
+- Claude now selects the org with `chat` capability, retries other orgs on permission errors, sends `lastActiveOrg`, and only marks success after a successful usage fetch.
+
+---
+
+## 1.8.2 — 2026-09-24
+
+### Fixed
+
+- Cursor authorize looked successful but usage stayed “session expired”: the dashboard cookie must be `userId%3A%3AJWT` (from the JWT `sub`), not the raw access token alone.
+- Cleared the stale “Cursor authorized” status when Keychain session is removed after a failed API check.
+
+---
+
+## 1.8.1 — 2026-09-24
+
+### Added
+
+- Auto-import local sessions on launch: Codex CLI (`~/.codex/auth.json`) and Cursor IDE login are copied into Keychain when Stack Meter has no session yet — so you don’t re-login if those Mac apps are already signed in.
+- Clearer auth hints: Safari/Chrome cookies are never shared; use CLI / Cursor IDE / in-app login instead.
+
+---
+
 ## 1.8.0 — 2026-09-24
 
 ### Removed

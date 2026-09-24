@@ -30,6 +30,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillFinishLaunching(_ notification: Notification) {
         // Single instance before any menu-bar / notification UI comes up.
         if !SingleInstanceGuard.enforceOrAlert() {
+            QuitConfirm.bypass = true
             NSApp.terminate(nil)
             return
         }
@@ -45,6 +46,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         // Refresh Launch Services so System Settings re-reads the icon.
         let url = Bundle.main.bundleURL as CFURL
         LSRegisterURL(url, true)
+    }
+
+    func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
+        if QuitConfirm.bypass {
+            return .terminateNow
+        }
+        return QuitConfirm.askUser() ? .terminateNow : .terminateCancel
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {

@@ -169,6 +169,12 @@ struct SettingsView: View {
                     signOut: { viewModel.signOutClaude() }
                 )
                 if !viewModel.claudeAuth.isAuthorized {
+                    if viewModel.claudeAuth.hasLocalDesktopLogin {
+                        Button(L10n.tr("auth.claude.fromDesktop")) {
+                            viewModel.authorizeClaudeFromDesktop()
+                        }
+                        .disabled(viewModel.claudeAuth.isBusy)
+                    }
                     Button(L10n.tr("auth.claude.browserLogin")) {
                         viewModel.authorizeClaudeBrowser()
                     }

@@ -22,41 +22,39 @@ struct ClaudeProvider: UsageProvider {
         }
 
         do {
-            var orgID = credentials.organizationID
-            if orgID == nil || orgID?.isEmpty == true {
-                let orgs = try await api.fetchOrganizations(sessionKey: credentials.sessionKey)
-                orgID = orgs.first?.uuid
-                if let orgID {
-                    try? ClaudeAuthStore.save(
-                        ClaudeCredentials(sessionKey: credentials.sessionKey, organizationID: orgID)
-                    )
-                }
-            }
-
-            guard let organizationID = orgID, !organizationID.isEmpty else {
-                return .authNeeded(providerID: id, providerName: displayName, message: "auth.claude.noOrg")
-            }
-
-            let usage = try await api.fetchUsage(
+            let (usage, orgID) = try await api.fetchUsageResolvingOrg(
                 sessionKey: credentials.sessionKey,
-                organizationID: organizationID
+                preferredOrganizationID: credentials.organizationID
             )
+            if orgID != credentials.organizationID {
+                try? ClaudeAuthStore.save(
+                    ClaudeCredentials(sessionKey: credentials.sessionKey, organizationID: orgID)
+                )
+            }
             return map(usage)
         } catch ProviderError.unauthorized {
             ClaudeAuthStore.clear()
             return .authNeeded(providerID: id, providerName: displayName, message: "auth.claude.expired")
-        } catch ProviderError.rateLimited {
-            return UsageSnapshot(
-                providerID: id,
-                providerName: displayName,
-                fetchedAt: Date(),
-                status: .rateLimited,
-                windows: [],
-                spend: SpendSummary(),
-                tokens: TokenSummary(),
-                planName: nil,
-                message: "auth.rateLimitedTemp"
-            )
+        } catch ProviderError.wrongOrganization {
+            return .authNeeded(providerID: id, providerName: displayName, message: "auth.claude.noOrg")
+        } catch let error as ProviderError {
+            if case .notAuthenticated(let message) = error {
+                return .authNeeded(providerID: id, providerName: displayName, message: message)
+            }
+            if case .rateLimited = error {
+                return UsageSnapshot(
+                    providerID: id,
+                    providerName: displayName,
+                    fetchedAt: Date(),
+                    status: .rateLimited,
+                    windows: [],
+                    spend: SpendSummary(),
+                    tokens: TokenSummary(),
+                    planName: nil,
+                    message: "auth.rateLimitedTemp"
+                )
+            }
+            throw error
         }
     }
 
@@ -91,7 +89,7 @@ struct ClaudeProvider: UsageProvider {
     }
 
     private func makeWindow(id: String, name: String, dto: ClaudeUsageWindowDTO) -> RateWindow {
-        // utilization is typically 0...1 fraction
+        // Claude returns utilization as 0...100 percent (legacy responses used 0...1).
         let raw = dto.utilization ?? 0
         let usedPercent = raw <= 1.0001 ? raw * 100 : raw
         return RateWindow(

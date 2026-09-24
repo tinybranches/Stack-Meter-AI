@@ -1,15 +1,20 @@
 import SwiftUI
-import WebKit
+import AppKit
 
-/// Browser login for Claude.ai — captures the `sessionKey` cookie after sign-in.
+/// Claude authorization without WKWebView — Claude.ai blanks out inside embedded browsers.
 struct ClaudeLoginView: View {
     var onSuccess: (String) -> Void
     var onCancel: () -> Void
+    var onImportDesktop: (() -> Void)?
 
     @State private var status = L10n.tr("auth.claude.loginHint")
+    @State private var manualKey = ""
+    @State private var isImporting = false
+
+    private var hasDesktop: Bool { ClaudeAuthStore.hasLocalDesktopLogin }
 
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(alignment: .leading, spacing: 0) {
             HStack {
                 Text(L10n.tr("auth.claude.loginTitle"))
                     .font(.headline)
@@ -17,102 +22,105 @@ struct ClaudeLoginView: View {
                 Button(L10n.tr("common.cancel")) { onCancel() }
                     .keyboardShortcut(.cancelAction)
             }
-            .padding(12)
+            .padding(14)
 
             Divider()
 
-            ClaudeWebView(status: $status) { sessionKey in
-                onSuccess(sessionKey)
+            ScrollView {
+                VStack(alignment: .leading, spacing: 18) {
+                    Text(L10n.tr("auth.claude.noWebViewExplain"))
+                        .font(.callout)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+
+                    Group {
+                        Text(L10n.tr("auth.claude.stepDesktopTitle"))
+                            .font(.subheadline.weight(.semibold))
+                        Text(L10n.tr("auth.claude.stepDesktopBody"))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
+
+                        Button {
+                            isImporting = true
+                            status = L10n.tr("auth.connecting")
+                            onImportDesktop?()
+                            Task { @MainActor in
+                                try? await Task.sleep(nanoseconds: 3_000_000_000)
+                                isImporting = false
+                            }
+                        } label: {
+                            Label(L10n.tr("auth.claude.fromDesktop"), systemImage: "laptopcomputer")
+                                .frame(maxWidth: .infinity)
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .controlSize(.large)
+                        .disabled(!hasDesktop || isImporting)
+
+                        if !hasDesktop {
+                            Text(L10n.tr("auth.claude.noDesktop"))
+                                .font(.caption2)
+                                .foregroundStyle(.orange)
+                        }
+                    }
+
+                    Divider()
+
+                    Group {
+                        Text(L10n.tr("auth.claude.stepSafariTitle"))
+                            .font(.subheadline.weight(.semibold))
+                        Text(L10n.tr("auth.claude.stepSafariBody"))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
+
+                        Button {
+                            NSWorkspace.shared.open(URL(string: "https://claude.ai/login")!)
+                            status = L10n.tr("auth.claude.safariHint")
+                        } label: {
+                            Label(L10n.tr("auth.claude.openSafari"), systemImage: "safari")
+                                .frame(maxWidth: .infinity)
+                        }
+                        .buttonStyle(.bordered)
+                        .controlSize(.large)
+
+                        HStack(spacing: 8) {
+                            SecureField(L10n.tr("auth.claude.pasteKey"), text: $manualKey)
+                                .textFieldStyle(.roundedBorder)
+                            Button(L10n.tr("auth.claude.useKey")) {
+                                let key = normalizeSessionKey(manualKey)
+                                guard !key.isEmpty else { return }
+                                status = L10n.tr("auth.connecting")
+                                onSuccess(key)
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .disabled(normalizeSessionKey(manualKey).isEmpty)
+                        }
+                    }
+                }
+                .padding(16)
             }
-            .frame(minWidth: 720, minHeight: 520)
 
             Divider()
             Text(status)
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(10)
+                .padding(12)
         }
-    }
-}
-
-private struct ClaudeWebView: NSViewRepresentable {
-    @Binding var status: String
-    var onSessionKey: (String) -> Void
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(status: $status, onSessionKey: onSessionKey)
+        .frame(minWidth: 520, idealWidth: 560, minHeight: 420, idealHeight: 480)
     }
 
-    func makeNSView(context: Context) -> WKWebView {
-        let config = WKWebViewConfiguration()
-        // Persistent store — OAuth / cookies fail more often with nonPersistent.
-        config.websiteDataStore = .default()
-        config.preferences.javaScriptCanOpenWindowsAutomatically = true
-        config.defaultWebpagePreferences.allowsContentJavaScript = true
-        let webView = WKWebView(frame: .zero, configuration: config)
-        webView.customUserAgent =
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Safari/605.1.15"
-        webView.navigationDelegate = context.coordinator
-        webView.uiDelegate = context.coordinator
-        context.coordinator.webView = webView
-        webView.load(URLRequest(url: URL(string: "https://claude.ai/login")!))
-        return webView
-    }
-
-    func updateNSView(_ nsView: WKWebView, context: Context) {}
-
-    final class Coordinator: NSObject, WKNavigationDelegate, WKUIDelegate {
-        var status: Binding<String>
-        var onSessionKey: (String) -> Void
-        weak var webView: WKWebView?
-        private var didEmit = false
-        private var isCancelled = false
-
-        init(status: Binding<String>, onSessionKey: @escaping (String) -> Void) {
-            self.status = status
-            self.onSessionKey = onSessionKey
+    /// Accepts raw cookie value or a full `sessionKey=...` / Cookie header paste.
+    private func normalizeSessionKey(_ raw: String) -> String {
+        var value = raw.trimmingCharacters(in: .whitespacesAndNewlines)
+        if value.lowercased().hasPrefix("sessionkey=") {
+            value = String(value.dropFirst("sessionKey=".count))
         }
-
-        deinit {
-            isCancelled = true
+        if let range = value.range(of: "sessionKey=") {
+            let rest = value[range.upperBound...]
+            value = String(rest.split(separator: ";").first ?? Substring(rest))
         }
-
-        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-            status.wrappedValue = L10n.tr("auth.claude.checkingCookies")
-            pollCookies()
-        }
-
-        func webView(
-            _ webView: WKWebView,
-            createWebViewWith configuration: WKWebViewConfiguration,
-            for navigationAction: WKNavigationAction,
-            windowFeatures: WKWindowFeatures
-        ) -> WKWebView? {
-            if navigationAction.targetFrame == nil, let url = navigationAction.request.url {
-                webView.load(URLRequest(url: url))
-            }
-            return nil
-        }
-
-        private func pollCookies() {
-            guard let webView, !didEmit, !isCancelled else { return }
-            webView.configuration.websiteDataStore.httpCookieStore.getAllCookies { [weak self] cookies in
-                guard let self, !self.didEmit, !self.isCancelled else { return }
-                if let session = cookies.first(where: { $0.name == "sessionKey" })?.value,
-                   !session.isEmpty
-                {
-                    self.didEmit = true
-                    DispatchQueue.main.async {
-                        self.status.wrappedValue = L10n.tr("auth.claude.success")
-                        self.onSessionKey(session)
-                    }
-                    return
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { [weak self] in
-                    self?.pollCookies()
-                }
-            }
-        }
+        return value.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }

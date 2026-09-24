@@ -26,11 +26,13 @@
 		60A48C9C0A60BC21DA7564C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A67F39DBF55FF585A8C479F /* Assets.xcassets */; };
 		61E91B619FC21816A39CC628 /* CodexAuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91077666E6A1A418D2BA22E3 /* CodexAuthStore.swift */; };
 		71DE7E7ED7AC166793858067 /* StatusDot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A585B90AEDDB3025F4295209 /* StatusDot.swift */; };
+		7C2321BB5426DCE9D5AB1358 /* ClaudeDesktopSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774A3F29BD0F8740F19F1E15 /* ClaudeDesktopSession.swift */; };
 		88265A476E7C7572025D9A90 /* PopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABEDA5730B9D95F8881C993 /* PopoverView.swift */; };
 		8B7B4EA8547AB7CEBB117995 /* CursorAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D6BD080B282117701D639D /* CursorAPIClient.swift */; };
 		9894EB6EC7DE9FBD781B9A02 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE7F996D7DD4334B9CF07E8 /* SettingsView.swift */; };
 		A31C2A2ABB83120B387FE850 /* ProviderRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FC61BB5FDCF04DEAAC9155E /* ProviderRegistry.swift */; };
 		A74EF9E827484B8BB044D458 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C27CCA9BCECB23CA9BC4946 /* AppSettings.swift */; };
+		B9FB5436DD0C2184F1408029 /* QuitConfirm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D6728EDEEFA444C0C0E94E /* QuitConfirm.swift */; };
 		C67E433CAFCCA792617C9F3D /* CursorAuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C4E033E51AFE6DA6A9B570 /* CursorAuthStore.swift */; };
 		C956391840E50BB2DC8DB588 /* CodexAuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8A95F7FB522BEA9E144A7B /* CodexAuthController.swift */; };
 		EE0490C76B29D36576029AB3 /* CursorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84496AFEAD85C9776DC753D2 /* CursorProvider.swift */; };
@@ -47,6 +49,7 @@
 		25A92A905CE959C49BDFD2E0 /* ClaudeProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeProvider.swift; sourceTree = "<group>"; };
 		303423F4DA65D5F92D4403E8 /* UsageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageViewModel.swift; sourceTree = "<group>"; };
 		4425488906869C079EEB8068 /* CodexAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodexAPIClient.swift; sourceTree = "<group>"; };
+		47D6728EDEEFA444C0C0E94E /* QuitConfirm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuitConfirm.swift; sourceTree = "<group>"; };
 		48B1A38E34DD629D049625B5 /* CodexUsageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodexUsageDTO.swift; sourceTree = "<group>"; };
 		4A67F39DBF55FF585A8C479F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5D1B024C1BAB6D6E9E9CA577 /* ProviderAuthControllers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderAuthControllers.swift; sourceTree = "<group>"; };
@@ -55,6 +58,7 @@
 		72498A931B8EDF7CD07F5186 /* MenuBarLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarLabelView.swift; sourceTree = "<group>"; };
 		72CC995FD19A0AAE5390C85F /* ClaudeLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeLoginView.swift; sourceTree = "<group>"; };
 		75DE6518E9D7AD68AFC501C5 /* ChatGPTLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGPTLoginView.swift; sourceTree = "<group>"; };
+		774A3F29BD0F8740F19F1E15 /* ClaudeDesktopSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaudeDesktopSession.swift; sourceTree = "<group>"; };
 		7D340C50DEAF0D99E496DBD2 /* CodexProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodexProvider.swift; sourceTree = "<group>"; };
 		7E8A95F7FB522BEA9E144A7B /* CodexAuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodexAuthController.swift; sourceTree = "<group>"; };
 		80C4E033E51AFE6DA6A9B570 /* CursorAuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorAuthStore.swift; sourceTree = "<group>"; };
@@ -84,6 +88,7 @@
 				91077666E6A1A418D2BA22E3 /* CodexAuthStore.swift */,
 				DC33F4D2AC173B0ADD660EA4 /* NotificationService.swift */,
 				5D1B024C1BAB6D6E9E9CA577 /* ProviderAuthControllers.swift */,
+				47D6728EDEEFA444C0C0E94E /* QuitConfirm.swift */,
 				DB84BA511643E2EB0423FD82 /* SingleInstanceGuard.swift */,
 				20E834991B040F5D3EA67BD5 /* UninstallService.swift */,
 				303423F4DA65D5F92D4403E8 /* UsageViewModel.swift */,
@@ -116,6 +121,7 @@
 			children = (
 				C82F6D48678DE5F014D889C4 /* ClaudeAPIClient.swift */,
 				6E9342C796B5EE30DF326E36 /* ClaudeAuthStore.swift */,
+				774A3F29BD0F8740F19F1E15 /* ClaudeDesktopSession.swift */,
 				25A92A905CE959C49BDFD2E0 /* ClaudeProvider.swift */,
 			);
 			path = Claude;
@@ -309,6 +315,7 @@
 				5F2B69EA1E203A60B8508EA1 /* ChatGPTLoginView.swift in Sources */,
 				28B661BC918E4DE41307F0F2 /* ClaudeAPIClient.swift in Sources */,
 				FA1D6F5988DF3EA7440E426C /* ClaudeAuthStore.swift in Sources */,
+				7C2321BB5426DCE9D5AB1358 /* ClaudeDesktopSession.swift in Sources */,
 				502CE9A8EB3EDC69395DEE28 /* ClaudeLoginView.swift in Sources */,
 				2B6B81B0170B012A064C5C57 /* ClaudeProvider.swift in Sources */,
 				54CFB95950CA35053BF2B223 /* CodexAPIClient.swift in Sources */,
@@ -326,6 +333,7 @@
 				88265A476E7C7572025D9A90 /* PopoverView.swift in Sources */,
 				00271D85CDEBFF9C485062C3 /* ProviderAuthControllers.swift in Sources */,
 				A31C2A2ABB83120B387FE850 /* ProviderRegistry.swift in Sources */,
+				B9FB5436DD0C2184F1408029 /* QuitConfirm.swift in Sources */,
 				9894EB6EC7DE9FBD781B9A02 /* SettingsView.swift in Sources */,
 				122361C8B7545A0933BE7ECA /* SingleInstanceGuard.swift in Sources */,
 				71DE7E7ED7AC166793858067 /* StatusDot.swift in Sources */,
@@ -394,7 +402,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 26;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -413,7 +421,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.8.0;
+				MARKETING_VERSION = 1.8.7;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -480,7 +488,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 26;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -493,7 +501,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.8.0;
+				MARKETING_VERSION = 1.8.7;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";

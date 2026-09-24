@@ -73,6 +73,10 @@ enum CursorAuthStore {
         guard !token.isEmpty else {
             throw ProviderError.notAuthenticated("auth.cursor.noToken")
         }
+        // VS Code sometimes stores strings as JSON-quoted values.
+        if token.hasPrefix("\""), let decoded = try? JSONDecoder().decode(String.self, from: Data(token.utf8)) {
+            return decoded
+        }
         return token
     }
 
