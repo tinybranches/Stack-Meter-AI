@@ -184,8 +184,8 @@ enum L10n {
             .ukrainian: "Авторизувати з входу Codex CLI",
         ],
         "auth.chatgpt.hint": [
-            .english: "One ChatGPT login unlocks both Codex and ChatGPT providers. Optional: import an existing Codex CLI session.",
-            .ukrainian: "Один вхід ChatGPT відкриває і Codex, і ChatGPT. За бажанням — імпорт сесії Codex CLI.",
+            .english: "One ChatGPT login unlocks both Codex and ChatGPT. If in-app Google login fails, run `codex login` then use “Authorize with Codex CLI login”.",
+            .ukrainian: "Один вхід ChatGPT відкриває і Codex, і ChatGPT. Якщо Google у вікні не входить — виконайте `codex login`, потім «Авторизувати з входу Codex CLI».",
         ],
         "auth.chatgpt.loginTitle": [
             .english: "ChatGPT login",
@@ -194,6 +194,14 @@ enum L10n {
         "auth.chatgpt.loginHint": [
             .english: "Sign in to ChatGPT in the window below.",
             .ukrainian: "Увійдіть у ChatGPT у вікні нижче.",
+        ],
+        "auth.chatgpt.passkeyHint": [
+            .english: "If Google asks for Bluetooth or a phone nearby, tap “Another way” and sign in with your password (or use Codex CLI import instead). Passkeys often fail in this window.",
+            .ukrainian: "Якщо Google просить Bluetooth або телефон поруч — натисніть «Інший спосіб» і ввійдіть паролем (або імпортуйте сесію Codex CLI). Passkey у цьому вікні часто не працює.",
+        ],
+        "auth.chatgpt.googleHint": [
+            .english: "Google sign-in: prefer password via “Another way” if Passkey/Bluetooth fails.",
+            .ukrainian: "Вхід Google: якщо Passkey/Bluetooth не спрацював — «Інший спосіб» → пароль.",
         ],
         "auth.chatgpt.checkingSession": [
             .english: "Waiting for login…",

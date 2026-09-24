@@ -74,6 +74,7 @@ final class CodexAuthController: ObservableObject {
 
     func signOut() {
         CodexAuthStore.clear()
+        ChatGPTWebLoginStore.clear()
         isAuthorized = false
         statusMessage = nil
         errorMessage = nil
@@ -101,7 +102,7 @@ final class CodexAuthController: ObservableObject {
         let window = NSWindow(contentViewController: hosting)
         window.title = L10n.tr("auth.chatgpt.loginTitle")
         window.styleMask = [.titled, .closable, .resizable]
-        window.setContentSize(NSSize(width: 760, height: 600))
+        window.setContentSize(NSSize(width: 780, height: 680))
         window.center()
         window.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)

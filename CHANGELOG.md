@@ -7,6 +7,18 @@ Format: version, date, then **Added** / **Changed** / **Fixed** / **Removed**.
 
 ---
 
+## 1.6.7 — 2026-09-24
+
+### Fixed
+
+- ChatGPT Google sign-in failing on Passkey / Bluetooth (“devices nearby”) inside the in-app browser: use a persistent web data store, Safari user-agent, handle OAuth popups, and show a hint to use **Another way → password** (or Codex CLI import).
+
+### Changed
+
+- Claude login web view uses the same persistent store + Safari UA for more reliable OAuth.
+
+---
+
 ## 1.6.6 — 2026-09-24
 
 ### Fixed
