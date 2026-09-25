@@ -103,6 +103,10 @@ DMG_PATH="$DIST/$DMG_NAME"
 RW_DMG="$DIST/.${DMG_NAME}.rw.dmg"
 rm -f "$DMG_PATH" "$RW_DMG"
 
+# Keep only the DMG being built — drop previous versions from dist/
+echo "==> Cleaning previous DMGs in dist/"
+find "$DIST" -maxdepth 1 \( -name 'Stack-Meter-AI-*.dmg' -o -name 'Stack-Meter-AI-*.dmg.sha256' \) ! -name "$DMG_NAME" ! -name "${DMG_NAME}.sha256" -print -delete || true
+
 echo "==> Creating read-write DMG (for volume icon)"
 hdiutil create \
   -volname "$VOLUME_NAME" \
@@ -158,7 +162,10 @@ guard let image = NSImage(contentsOfFile: icon) else {
 }
 let ok = NSWorkspace.shared.setIcon(image, forFile: dmg, options: [])
 print(\"DMG file icon set:\", ok)
-" 
+"
+
+echo "==> Writing SHA-256 checksum (latest only)"
+shasum -a 256 "$DMG_PATH" | tee "${DMG_PATH}.sha256" >/dev/null
 
 echo ""
 echo "Done."

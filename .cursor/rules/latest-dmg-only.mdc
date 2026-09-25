@@ -1,0 +1,14 @@
+---
+description: When pushing to Git, only keep/commit the latest DMG in dist/
+alwaysApply: true
+---
+
+# Release DMG in git
+
+When the user asks to push/upload to git («залий на гіт» / similar):
+
+1. Build/package if needed so `dist/Stack-Meter-AI-<latest>.dmg` exists.
+2. **Only the latest version** belongs in `dist/` and in the commit.
+3. Delete any older `dist/Stack-Meter-AI-*.dmg` and `*.dmg.sha256` before staging.
+4. Do not commit multiple DMG versions side by side.
+5. Prefer `bash scripts/package.sh` — it already removes previous DMGs when creating a new one.

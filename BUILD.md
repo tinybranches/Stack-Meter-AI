@@ -52,7 +52,7 @@ Open the DMG and drag **Stack Meter AI** into **Applications**.
 6. Creates a compressed UDZO DMG with volume name `Stack Meter AI <version>`
 7. Sets the volume icon and the Finder icon on the `.dmg` file
 
-Build artifacts go under `build/` (gitignored). Only the final DMG is under `dist/` (also gitignored by default).
+Build artifacts go under `build/` (gitignored). The final installer is `dist/Stack-Meter-AI-<version>.dmg` — **only the latest** DMG is kept (older ones are deleted by `package.sh`).
 
 ## Version number
 
@@ -138,7 +138,7 @@ scripts/package.sh       # Release build → DMG
 scripts/generate_icons.py
 Branding/AppIcon.icns    # embedded in the .app
 Design/icons/VolumeIcon.icns
-dist/                    # output DMGs (gitignored)
+dist/                    # latest release DMG only (older versions removed by package.sh)
 build/                   # DerivedData + staging (gitignored)
 CHANGELOG.md             # note each release here
 ```
