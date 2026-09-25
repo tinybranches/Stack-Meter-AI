@@ -10,9 +10,9 @@ xcuserdata/
 *.dSYM.zip
 *.dSYM
 
-# Distribution staging (keep dist/*.dmg if you want; ignore by default)
-dist/*.dmg
-dist/*.dmg.sha256
+# Distribution: keep release DMGs in dist/ for GitHub
+# (ignore Finder junk / temp RW images only)
+dist/.DS_Store
 dist/.*.rw.dmg
 
 # Generated icon intermediates (keep *.icns + *-1024.png)
