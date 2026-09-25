@@ -7,6 +7,14 @@ Format: version, date, then **Added** / **Changed** / **Fixed** / **Removed**.
 
 ---
 
+## 1.8.8 — 2026-09-25
+
+### Fixed
+
+- Claude usage could show ~1% as 100%: web `/usage` returns percents (0–100), and treating `utilization <= 1` as a fraction turned `1` into a full bar. Also show extra weekly windows when present (OAuth/Code, Cowork).
+
+---
+
 ## 1.8.7 — 2026-09-24
 
 ### Fixed

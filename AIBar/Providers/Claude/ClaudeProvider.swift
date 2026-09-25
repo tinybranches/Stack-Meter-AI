@@ -73,7 +73,14 @@ struct ClaudeProvider: UsageProvider {
         if let opus = usage.seven_day_opus {
             windows.append(makeWindow(id: "seven_day_opus", name: "window.opus", dto: opus))
         }
+        if let oauth = usage.seven_day_oauth_apps {
+            windows.append(makeWindow(id: "seven_day_oauth_apps", name: "window.oauthApps", dto: oauth))
+        }
+        if let cowork = usage.seven_day_cowork {
+            windows.append(makeWindow(id: "seven_day_cowork", name: "window.cowork", dto: cowork))
+        }
 
+        // Red status only when a window that can block chat is exhausted.
         let limited = windows.contains { $0.usedPercent >= 99.5 || $0.limitReached }
         return UsageSnapshot(
             providerID: id,
@@ -89,17 +96,28 @@ struct ClaudeProvider: UsageProvider {
     }
 
     private func makeWindow(id: String, name: String, dto: ClaudeUsageWindowDTO) -> RateWindow {
-        // Claude returns utilization as 0...100 percent (legacy responses used 0...1).
-        let raw = dto.utilization ?? 0
-        let usedPercent = raw <= 1.0001 ? raw * 100 : raw
+        let usedPercent = Self.normalizeUtilization(dto.utilization)
         return RateWindow(
             id: id,
             name: name,
-            usedPercent: min(100, max(0, usedPercent)),
+            usedPercent: usedPercent,
             resetAt: parseISO(dto.resetsISO),
             resetAfterSeconds: nil,
             limitReached: usedPercent >= 99.5
         )
+    }
+
+    /// Claude.ai `/usage` returns percents (0…100). Some legacy payloads used
+    /// fractions (0…1). Never treat exactly `1` as “100%” — that misreads 1% as full.
+    static func normalizeUtilization(_ raw: Double?) -> Double {
+        guard let raw else { return 0 }
+        let value: Double
+        if raw > 0, raw < 1 {
+            value = raw * 100
+        } else {
+            value = raw
+        }
+        return min(100, max(0, value))
     }
 
     private func parseISO(_ value: String?) -> Date? {

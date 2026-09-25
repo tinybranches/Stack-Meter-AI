@@ -631,6 +631,8 @@ enum L10n {
         "window.weekly": [.english: "Weekly", .ukrainian: "Тиждень"],
         "window.daily": [.english: "Daily", .ukrainian: "День"],
         "window.monthly": [.english: "Monthly", .ukrainian: "Місяць"],
-        "window.5h": [.english: "5-hour", .ukrainian: "5 годин"],
+        "window.5h": [.english: "Current session", .ukrainian: "Поточна сесія"],
+        "window.oauthApps": [.english: "OAuth / Claude Code", .ukrainian: "OAuth / Claude Code"],
+        "window.cowork": [.english: "Cowork weekly", .ukrainian: "Cowork (тиждень)"],
     ]
 }

@@ -40,6 +40,8 @@ struct ClaudeUsageResponse: Decodable, Sendable {
     let seven_day: ClaudeUsageWindowDTO?
     let seven_day_sonnet: ClaudeUsageWindowDTO?
     let seven_day_opus: ClaudeUsageWindowDTO?
+    let seven_day_oauth_apps: ClaudeUsageWindowDTO?
+    let seven_day_cowork: ClaudeUsageWindowDTO?
 
     let fiveHour: ClaudeUsageWindowDTO?
     let sevenDay: ClaudeUsageWindowDTO?
